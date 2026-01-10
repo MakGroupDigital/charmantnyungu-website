@@ -1,0 +1,50 @@
+{
+  "name": "Charmant Nyungu K. - Consultant Innovation Technologique & Panafricaniste",
+  "short_name": "CNK Consultant",
+  "description": "Charmant Nyungu K., consultant expert en transformation digitale, innovation technologique, data science, cybersécurité et stratégie panafricaniste. Basé à Kinshasa et Dakar.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0F172A",
+  "theme_color": "#D97706",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "fr",
+  "categories": ["business", "technology", "consulting"],
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/favicon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/og-image.svg",
+      "sizes": "1200x630",
+      "type": "image/svg+xml",
+      "form_factor": "wide",
+      "label": "Charmant Nyungu K. - Page d'accueil"
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false
+}

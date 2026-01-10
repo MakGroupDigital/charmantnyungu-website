@@ -1,0 +1,33 @@
+# Robots.txt pour charmantnyungu.com
+# Charmant Nyungu K. - Consultant Innovation Technologique
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://charmantnyungu.com/sitemap.xml
+
+# Crawl-delay pour être respectueux des ressources serveur
+Crawl-delay: 1
+
+# Autoriser tous les robots de recherche majeurs
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Yandex
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+# Fichiers statiques autorisés
+Allow: /photos/
+Allow: /favicon.svg
+Allow: /favicon.ico
+Allow: /og-image.svg

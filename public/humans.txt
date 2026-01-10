@@ -1,0 +1,25 @@
+/* TEAM */
+Créateur & Développeur: Charmant Nyungu K.
+Contact: consultant@charmantnyungu.com
+Site: https://charmantnyungu.com
+Localisation: Kinshasa, RDC / Dakar, Sénégal
+
+/* SITE */
+Dernière mise à jour: 2026/01/10
+Standards: HTML5, CSS3, JavaScript ES6+
+Composants: React 19, Vite, TailwindCSS
+Hébergement: Vercel
+Domaine: charmantnyungu.com
+
+/* REMERCIEMENTS */
+Police: Playfair Display, Inter (Google Fonts)
+Icônes: Heroicons, Custom SVG
+Framework CSS: TailwindCSS
+
+/* NOTE */
+Ce site a été conçu avec passion pour promouvoir l'innovation 
+technologique et le panafricanisme. Bâtissons ensemble les 
+fondations de l'Afrique de demain, un octet à la fois.
+
+- Charmant Nyungu K.
+

@@ -1,0 +1,11 @@
+# Security Policy for charmantnyungu.com
+# Site de Charmant Nyungu K. - Consultant Innovation & Panafricaniste
+
+Contact: mailto:consultant@charmantnyungu.com
+Expires: 2027-01-01T00:00:00.000Z
+Preferred-Languages: fr, en
+Canonical: https://charmantnyungu.com/.well-known/security.txt
+
+# Pour signaler une vulnérabilité de sécurité, veuillez contacter:
+# consultant@charmantnyungu.com
+

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+  
+  <!-- Page d'accueil - Charmant Nyungu K. -->
+  <url>
+    <loc>https://charmantnyungu.com/</loc>
+    <lastmod>2026-01-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://charmantnyungu.com/og-image.svg</image:loc>
+      <image:title>Charmant Nyungu K. - Consultant Innovation Technologique</image:title>
+    </image:image>
+  </url>
+  
+  <!-- À Propos - Biographie Charmant Nyungu -->
+  <url>
+    <loc>https://charmantnyungu.com/#about</loc>
+    <lastmod>2026-01-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <!-- Expertise - Compétences Consultant -->
+  <url>
+    <loc>https://charmantnyungu.com/#expertise</loc>
+    <lastmod>2026-01-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <!-- Projets - Portfolio Nyungu -->
+  <url>
+    <loc>https://charmantnyungu.com/#projects</loc>
+    <lastmod>2026-01-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Tribune - Articles et Réflexions -->
+  <url>
+    <loc>https://charmantnyungu.com/#tribune</loc>
+    <lastmod>2026-01-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Galerie - Photos Charmant -->
+  <url>
+    <loc>https://charmantnyungu.com/#gallery</loc>
+    <lastmod>2026-01-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <!-- Contact -->
+  <url>
+    <loc>https://charmantnyungu.com/#contact</loc>
+    <lastmod>2026-01-10</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Mentions Légales -->
+  <url>
+    <loc>https://charmantnyungu.com/#legal</loc>
+    <lastmod>2026-01-10</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+</urlset>
