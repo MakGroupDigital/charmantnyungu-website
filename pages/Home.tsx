@@ -5,12 +5,19 @@ import Services from '../components/Services';
 import Vision from '../components/Vision';
 import Advisor from '../components/Advisor';
 import InteractiveSections from '../components/InteractiveSections';
+import { navigateToPage } from '../utils/navigation';
 
 interface HomeProps {
   onNavigate: (p: string) => void;
 }
 
 const Home: React.FC<HomeProps> = ({ onNavigate }) => {
+  const handleNavigation = (pageId: string) => {
+    navigateToPage(pageId as Parameters<typeof navigateToPage>[0]);
+    onNavigate(pageId);
+    setTimeout(() => window.scrollTo(0, 0), 10);
+  };
+
   return (
     <>
       <Hero />
@@ -46,7 +53,7 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
                    { name: "Elenge.cd", tag: "Média", desc: "Média numérique panafricain pour la jeunesse." },
                    { name: "YA BISO APP", tag: "Tourisme", desc: "Promotion de la culture et du tourisme congolais." }
                  ].map((proj, i) => (
-                   <div key={i} className="flex justify-between items-center group cursor-pointer" onClick={() => onNavigate('projects')}>
+                   <div key={i} className="flex justify-between items-center group cursor-pointer" onClick={() => handleNavigation('projects')}>
                      <div>
                        <div className="font-bold text-slate-900 group-hover:text-amber-600 transition-colors">{proj.name}</div>
                        <div className="text-xs text-slate-500">{proj.desc}</div>
@@ -55,7 +62,7 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
                    </div>
                  ))}
                </div>
-               <button onClick={() => onNavigate('projects')} className="w-full mt-8 py-3 border border-slate-200 text-slate-600 font-bold rounded-xl hover:bg-slate-900 hover:text-white transition-all text-sm uppercase tracking-widest">Voir tous les projets</button>
+               <button onClick={() => handleNavigation('projects')} className="w-full mt-8 py-3 border border-slate-200 text-slate-600 font-bold rounded-xl hover:bg-slate-900 hover:text-white transition-all text-sm uppercase tracking-widest">Voir tous les projets</button>
             </div>
           </div>
         </div>

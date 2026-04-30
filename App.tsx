@@ -10,26 +10,28 @@ import Projects from './pages/Projects';
 import Tribune from './pages/Tribune';
 import Legal from './pages/Legal';
 import Gallery from './pages/Gallery';
-
-type PageType = 'home' | 'about' | 'expertise' | 'projects' | 'tribune' | 'legal' | 'gallery';
+import Manifeste from './pages/Manifeste';
+import { getPageFromLocation, navigateToPage, PageType, syncLegacyHashRoute } from './utils/navigation';
 
 const App: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<PageType>('home');
 
-  // Handle URL hash navigation or state navigation
   useEffect(() => {
-    const handleHash = () => {
-      const hash = window.location.hash.replace('#', '') as PageType;
-      if (['home', 'about', 'expertise', 'projects', 'tribune', 'legal', 'gallery'].includes(hash)) {
-        setCurrentPage(hash);
-      }
+    const syncRoute = () => {
+      syncLegacyHashRoute();
+      setCurrentPage(getPageFromLocation());
     };
-    window.addEventListener('hashchange', handleHash);
-    handleHash();
-    return () => window.removeEventListener('hashchange', handleHash);
+
+    window.addEventListener('popstate', syncRoute);
+    window.addEventListener('hashchange', syncRoute);
+    syncRoute();
+
+    return () => {
+      window.removeEventListener('popstate', syncRoute);
+      window.removeEventListener('hashchange', syncRoute);
+    };
   }, []);
 
-  // Get SEO data for current page
   const currentSEO = seoData[currentPage] || seoData.home;
 
   const renderPage = () => {
@@ -38,6 +40,7 @@ const App: React.FC = () => {
       case 'expertise': return <Expertise />;
       case 'projects': return <Projects />;
       case 'tribune': return <Tribune />;
+      case 'manifeste': return <Manifeste />;
       case 'legal': return <Legal />;
       case 'gallery': return <Gallery />;
       default: return <Home onNavigate={(p) => setCurrentPage(p as PageType)} />;
@@ -51,12 +54,26 @@ const App: React.FC = () => {
         description={currentSEO.description}
         keywords={currentSEO.keywords}
         url={currentSEO.url}
+        image={currentSEO.image}
       />
-      <Navbar onNavigate={(p) => setCurrentPage(p as PageType)} currentPage={currentPage} />
+      <Navbar
+        onNavigate={(p) => {
+          const nextPage = p as PageType;
+          navigateToPage(nextPage);
+          setCurrentPage(nextPage);
+        }}
+        currentPage={currentPage}
+      />
       <main id="main-content">
         {renderPage()}
       </main>
-      <Footer onNavigate={(p) => setCurrentPage(p as PageType)} />
+      <Footer
+        onNavigate={(p) => {
+          const nextPage = p as PageType;
+          navigateToPage(nextPage);
+          setCurrentPage(nextPage);
+        }}
+      />
     </div>
   );
 };

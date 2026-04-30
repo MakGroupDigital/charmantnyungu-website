@@ -76,37 +76,43 @@ export const seoData = {
     title: "À Propos de Charmant Nyungu K. | Parcours & Vision | Consultant Innovation Afrique",
     description: "Découvrez le parcours de Charmant Nyungu K., consultant en innovation technologique et transformation digitale. Visionnaire panafricaniste engagé pour le développement technologique de l'Afrique. Expertise en data science, cybersécurité et leadership.",
     keywords: "Charmant Nyungu biographie, parcours Charmant, consultant africain, visionnaire panafricaniste, expert transformation digitale Afrique, leadership technologique, innovation Afrique, Nyungu parcours, CNK biographie",
-    url: "https://charmantnyungu.com/#about"
+    url: "https://charmantnyungu.com/a-propos"
   },
   expertise: {
     title: "Expertise & Compétences | Charmant Nyungu K. | Data Science, Cybersécurité, Innovation",
     description: "Les domaines d'expertise de Charmant Nyungu K. : Data Science & Intelligence Artificielle, Cybersécurité, Développement Web, Transformation Digitale, Communication Stratégique et Mentorat. Solutions sur mesure pour l'Afrique.",
     keywords: "expertise Charmant Nyungu, data science Afrique, cybersécurité RDC, développement web Congo, transformation digitale consultant, intelligence artificielle Afrique, compétences Nyungu, services consulting, expert IA Kinshasa",
-    url: "https://charmantnyungu.com/#expertise"
+    url: "https://charmantnyungu.com/expertise"
   },
   projects: {
     title: "Projets & Réalisations | Charmant Nyungu K. | Portfolio Innovation Technologique",
     description: "Portfolio des projets réalisés par Charmant Nyungu K. : plateformes digitales, solutions d'intelligence artificielle, systèmes de cybersécurité et initiatives panafricaines. Découvrez les réalisations concrètes.",
     keywords: "projets Charmant Nyungu, portfolio consultant, réalisations innovation, plateformes digitales Afrique, projets technologiques RDC, solutions IA, initiatives panafricaines, YBS Innovate",
-    url: "https://charmantnyungu.com/#projects"
+    url: "https://charmantnyungu.com/projets"
+  },
+  manifeste: {
+    title: "Manifeste | Etre Artificiel Autonome, l'IA d'ici 2070 | Charmant Nyungu K.",
+    description: "Découvrez le manifeste de Charmant Nyungu K. sur l'émergence de l'être artificiel autonome, la conscience encadrée, l'éthique de l'IA et les enjeux de cohabitation entre intelligence humaine et intelligence artificielle d'ici 2070.",
+    keywords: "manifeste IA, etre artificiel autonome, IA 2070, conscience artificielle, sentience programmee, ethique IA, Charmant Nyungu manifeste, futur intelligence artificielle, autonomie numerique",
+    url: "https://charmantnyungu.com/manifeste/etre-artificiel-autonome-ia-2070",
+    image: "https://res.cloudinary.com/dy73hzkpm/image/upload/v1777539703/IMG_3306_ulsv8q.png"
   },
   tribune: {
     title: "Tribune & Réflexions | Charmant Nyungu K. | Panafricanisme, Technologie, Leadership",
     description: "Les réflexions et analyses de Charmant Nyungu K. sur le panafricanisme, la souveraineté technologique africaine, le leadership et la gouvernance numérique. Articles et tribunes sur l'avenir de l'Afrique.",
     keywords: "tribune Charmant Nyungu, panafricanisme articles, souveraineté technologique Afrique, leadership africain, gouvernance numérique, réflexions Nyungu, blog consultant, analyses politiques Afrique",
-    url: "https://charmantnyungu.com/#tribune"
+    url: "https://charmantnyungu.com/tribune"
   },
   gallery: {
     title: "Galerie Photos | Charmant Nyungu K. | Moments & Événements",
     description: "Galerie photos de Charmant Nyungu K. : conférences, événements, rencontres professionnelles et moments clés du parcours d'un consultant engagé pour l'innovation africaine.",
     keywords: "photos Charmant Nyungu, galerie consultant, événements innovation, conférences Afrique, Nyungu images, CNK photos, moments professionnels",
-    url: "https://charmantnyungu.com/#gallery"
+    url: "https://charmantnyungu.com/galerie"
   },
   legal: {
     title: "Mentions Légales & Politique de Confidentialité | Charmant Nyungu K.",
     description: "Mentions légales et politique de confidentialité du site de Charmant Nyungu K. Informations sur l'éditeur, la protection des données et les conditions d'utilisation.",
     keywords: "mentions légales Charmant Nyungu, politique confidentialité, RGPD, protection données, conditions utilisation",
-    url: "https://charmantnyungu.com/#legal"
+    url: "https://charmantnyungu.com/mentions-legales"
   }
 };
-

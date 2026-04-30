@@ -19,7 +19,7 @@
   
   <!-- À Propos - Biographie Charmant Nyungu -->
   <url>
-    <loc>https://charmantnyungu.com/#about</loc>
+    <loc>https://charmantnyungu.com/a-propos</loc>
     <lastmod>2026-01-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
@@ -27,7 +27,7 @@
   
   <!-- Expertise - Compétences Consultant -->
   <url>
-    <loc>https://charmantnyungu.com/#expertise</loc>
+    <loc>https://charmantnyungu.com/expertise</loc>
     <lastmod>2026-01-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
@@ -35,15 +35,27 @@
   
   <!-- Projets - Portfolio Nyungu -->
   <url>
-    <loc>https://charmantnyungu.com/#projects</loc>
+    <loc>https://charmantnyungu.com/projets</loc>
     <lastmod>2026-01-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
+
+  <!-- Manifeste - Etre Artificiel Autonome -->
+  <url>
+    <loc>https://charmantnyungu.com/manifeste/etre-artificiel-autonome-ia-2070</loc>
+    <lastmod>2026-04-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.95</priority>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dy73hzkpm/image/upload/v1777539703/IMG_3306_ulsv8q.png</image:loc>
+      <image:title>Etre Artificiel Autonome - L'IA d'ici 2070</image:title>
+    </image:image>
+  </url>
   
   <!-- Tribune - Articles et Réflexions -->
   <url>
-    <loc>https://charmantnyungu.com/#tribune</loc>
+    <loc>https://charmantnyungu.com/tribune</loc>
     <lastmod>2026-01-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -51,7 +63,7 @@
   
   <!-- Galerie - Photos Charmant -->
   <url>
-    <loc>https://charmantnyungu.com/#gallery</loc>
+    <loc>https://charmantnyungu.com/galerie</loc>
     <lastmod>2026-01-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -59,7 +71,7 @@
   
   <!-- Contact -->
   <url>
-    <loc>https://charmantnyungu.com/#contact</loc>
+    <loc>https://charmantnyungu.com/</loc>
     <lastmod>2026-01-10</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.8</priority>
@@ -67,7 +79,7 @@
   
   <!-- Mentions Légales -->
   <url>
-    <loc>https://charmantnyungu.com/#legal</loc>
+    <loc>https://charmantnyungu.com/mentions-legales</loc>
     <lastmod>2026-01-10</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>

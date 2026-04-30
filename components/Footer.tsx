@@ -1,17 +1,24 @@
 
 import React from 'react';
+import { navigateToPage } from '../utils/navigation';
 
 interface FooterProps {
   onNavigate: (p: string) => void;
 }
 
 const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
+  const handleNavigation = (pageId: string) => {
+    onNavigate(pageId);
+    navigateToPage(pageId as Parameters<typeof navigateToPage>[0]);
+    setTimeout(() => window.scrollTo(0, 0), 10);
+  };
+
   return (
     <footer id="contact" className="py-20 bg-white border-t border-slate-200">
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
           <div className="lg:col-span-2">
-            <button onClick={() => { onNavigate('home'); window.scrollTo(0, 0); }} className="text-3xl font-bold tracking-tighter mb-6 block text-slate-900 text-left">
+            <button onClick={() => handleNavigation('home')} className="text-3xl font-bold tracking-tighter mb-6 block text-slate-900 text-left">
               <span className="text-amber-600 italic">Charmant</span> Nyungu K.
             </button>
             <p className="text-slate-600 max-w-sm mb-8 leading-relaxed">
@@ -47,12 +54,13 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
           <div>
             <h4 className="text-slate-900 font-bold mb-6 uppercase text-xs tracking-[0.2em]">Navigation</h4>
             <ul className="space-y-3 text-slate-600 text-sm font-medium">
-              <li><button onClick={() => {onNavigate('about'); window.scrollTo(0,0);}} className="hover:text-amber-600 transition-colors">À Propos</button></li>
-              <li><button onClick={() => {onNavigate('expertise'); window.scrollTo(0,0);}} className="hover:text-amber-600 transition-colors">Expertise</button></li>
-              <li><button onClick={() => {onNavigate('projects'); window.scrollTo(0,0);}} className="hover:text-amber-600 transition-colors">Projets</button></li>
-              <li><button onClick={() => {onNavigate('tribune'); window.scrollTo(0,0);}} className="hover:text-amber-600 transition-colors">Tribune</button></li>
-              <li><button onClick={() => {onNavigate('gallery'); window.scrollTo(0,0);}} className="hover:text-amber-600 transition-colors">Galerie</button></li>
-              <li><button onClick={() => {onNavigate('legal'); window.scrollTo(0,0);}} className="hover:text-amber-600 transition-colors">Mentions Légales</button></li>
+              <li><button onClick={() => handleNavigation('about')} className="hover:text-amber-600 transition-colors">À Propos</button></li>
+              <li><button onClick={() => handleNavigation('expertise')} className="hover:text-amber-600 transition-colors">Expertise</button></li>
+              <li><button onClick={() => handleNavigation('projects')} className="hover:text-amber-600 transition-colors">Projets</button></li>
+              <li><button onClick={() => handleNavigation('manifeste')} className="hover:text-amber-600 transition-colors">Manifeste</button></li>
+              <li><button onClick={() => handleNavigation('tribune')} className="hover:text-amber-600 transition-colors">Tribune</button></li>
+              <li><button onClick={() => handleNavigation('gallery')} className="hover:text-amber-600 transition-colors">Galerie</button></li>
+              <li><button onClick={() => handleNavigation('legal')} className="hover:text-amber-600 transition-colors">Mentions Légales</button></li>
             </ul>
           </div>
         </div>
@@ -60,8 +68,8 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
         <div className="pt-8 border-t border-slate-100 flex flex-col md:flex-row justify-between items-center gap-4 text-slate-400 text-[10px] uppercase font-bold tracking-widest">
           <div>&copy; {new Date().getFullYear()} Charmant Nyungu K. - Tous droits réservés.</div>
           <div className="flex gap-4">
-             <button onClick={() => onNavigate('legal')}>Politique de Confidentialité</button>
-             <button onClick={() => onNavigate('legal')}>Mentions Légales</button>
+             <button onClick={() => handleNavigation('legal')}>Politique de Confidentialité</button>
+             <button onClick={() => handleNavigation('legal')}>Mentions Légales</button>
           </div>
         </div>
       </div>
