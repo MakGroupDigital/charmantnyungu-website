@@ -65,10 +65,11 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentPage }) => {
       <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
         <button 
             onClick={() => handleNavigation('home')}
-            className="text-2xl font-bold tracking-tighter flex items-center gap-2 group"
+            className="group text-left"
         >
-          <span className="w-10 h-10 bg-gradient-to-br from-amber-500 to-orange-600 rounded-lg flex items-center justify-center text-white group-hover:scale-110 transition-transform shadow-md font-sans">CNK</span>
-          <span className="hidden sm:block text-slate-900 font-serif">Charmant Nyungu K.</span>
+          <span className="block text-xl font-black uppercase tracking-[0.18em] text-slate-900 transition-colors group-hover:text-amber-600 sm:text-2xl">
+            Charmant Nyungu K.
+          </span>
         </button>
         
         <div className="hidden md:flex gap-6 lg:gap-8">

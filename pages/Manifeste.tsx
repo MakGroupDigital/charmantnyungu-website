@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 
-const MANIFESTO_PDF = encodeURI('/-Manifeste  Être Artificiel Autonome-.pdf');
+const MANIFESTO_PDF = '/manifeste-etre-artificiel-autonome.pdf';
 const COVER_IMAGE = 'https://res.cloudinary.com/dy73hzkpm/image/upload/v1777539703/IMG_3306_ulsv8q.png';
 const STATS_ENDPOINT = '/api/manifeste-stats';
 const STORAGE_KEYS = {

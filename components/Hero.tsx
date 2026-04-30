@@ -3,11 +3,11 @@ import React, { useState, useEffect } from 'react';
 
 const Hero: React.FC = () => {
   const slogans = [
-    "Bâtir l'avenir Technologique de l'Afrique.",
-    "Transformer les données en décisions.",
-    "Innover pour la souveraineté numérique.",
-    "Former les leaders de demain.",
-    "L'IA au service du continent.",
+    "Bâtir l'avenir technologique de l'Afrique.",
+    "Transformer les données en décisions d'Etat.",
+    "Porter une souveraineté numérique assumée.",
+    "Structurer les leaderships de demain.",
+    "Mettre l'innovation au service du continent.",
   ];
 
   const [currentSloganIndex, setCurrentSloganIndex] = useState(0);
@@ -46,54 +46,120 @@ const Hero: React.FC = () => {
   }, [charIndex, isTyping, currentSloganIndex]);
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center overflow-hidden pt-20">
-      {/* Background Image */}
+    <section id="home" className="relative min-h-screen overflow-hidden pt-24">
       <div className="absolute inset-0 z-0">
         <img 
           src="/photos/f1374e3a-3aaf-466b-87eb-6bc2f713d5e3.jpg.JPG" 
           alt="Background" 
-          className="w-full h-full object-cover"
+          className="h-full w-full object-cover object-[82%_center] [image-rendering:auto] md:object-center"
         />
-        <div className="absolute inset-0 bg-slate-900/40"></div>
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(2,6,23,0.56)_0%,rgba(2,6,23,0.4)_42%,rgba(2,6,23,0.18)_70%,rgba(2,6,23,0.08)_100%)] md:bg-[linear-gradient(90deg,rgba(2,6,23,0.92)_0%,rgba(2,6,23,0.84)_42%,rgba(2,6,23,0.56)_70%,rgba(2,6,23,0.3)_100%)]"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(245,158,11,0.05),_transparent_24%)] md:bg-[radial-gradient(circle_at_top,_rgba(245,158,11,0.16),_transparent_30%)]"></div>
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
-        <div>
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-amber-400/50 bg-amber-500/20 backdrop-blur-sm text-amber-300 text-xs font-bold uppercase tracking-widest mb-6">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
-            </span>
-            Innovation & Souveraineté
-          </div>
-          <h1 className="text-5xl lg:text-7xl font-extrabold text-white leading-[1.1] mb-8 drop-shadow-lg min-h-[180px] lg:min-h-[220px]">
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-400">
-              {displayedText}
-            </span>
-            <span className="animate-pulse text-amber-400">|</span>
+      <div className="relative z-10 mx-auto grid min-h-[calc(100vh-6rem)] max-w-7xl items-center gap-12 px-6 py-16 lg:grid-cols-[1.15fr_0.85fr]">
+        <div className="pt-40 md:pt-0">
+          <h1 className="mb-8 ml-auto max-w-[16rem] text-right text-4xl font-black leading-[1.02] text-white md:ml-0 md:max-w-4xl md:text-left md:text-6xl lg:text-7xl">
+            Consultant en technologie
+            <span className="block text-amber-400">et panafricaniste</span>
           </h1>
-          <p className="text-lg text-white/90 mb-10 max-w-xl leading-relaxed drop-shadow-md">
-            Consultant expert en transformation digitale et porteur d'une vision panafricaine engagée. 
-            J'accompagne les institutions dans la maîtrise des technologies de rupture pour un impact durable.
+
+          <div className="mb-8 hidden rounded-2xl border border-white/10 bg-white/8 p-5 backdrop-blur-md md:block">
+            <div className="mb-3 text-[11px] font-bold uppercase tracking-[0.28em] text-amber-300">
+              Orientation du moment
+            </div>
+            <div className="min-h-[68px] text-2xl font-semibold leading-tight text-white md:min-h-[72px]">
+              {displayedText}
+              <span className="animate-pulse text-amber-400">|</span>
+            </div>
+          </div>
+
+          <p className="mb-10 hidden max-w-xl rounded-2xl border border-white/10 bg-slate-950/55 px-5 py-4 text-base leading-relaxed text-white shadow-lg backdrop-blur-sm md:block md:max-w-2xl md:bg-transparent md:px-0 md:py-0 md:text-lg md:text-white/88 md:shadow-none md:backdrop-blur-none">
+            Consultant en innovation technologique, souverainete numerique et intelligence artificielle, j'accompagne
+            les institutions, les dirigeants et les projets structurants dans la construction d'une Afrique plus stable,
+            plus competente et plus maitresse de ses infrastructures strategiques.
           </p>
-          <div className="flex flex-wrap gap-4">
-            <a href="#contact" className="px-8 py-4 bg-amber-500 hover:bg-amber-600 text-white font-bold rounded-xl transition-all shadow-xl shadow-amber-500/30">
-              Travaillons Ensemble
+
+          <div className="mb-10 hidden max-w-3xl gap-4 sm:grid-cols-3 md:grid">
+            {[
+              { value: 'Vision', label: 'Leadership technologique de long terme' },
+              { value: 'Etat', label: 'Approche institutionnelle et gouvernance' },
+              { value: 'Impact', label: 'Solutions utiles, souveraines et durables' },
+            ].map((item) => (
+              <div key={item.value} className="rounded-2xl border border-white/10 bg-slate-950/35 p-4 backdrop-blur-md">
+                <div className="text-sm font-black uppercase tracking-[0.24em] text-amber-300">{item.value}</div>
+                <div className="mt-2 text-sm leading-relaxed text-white/75">{item.label}</div>
+              </div>
+            ))}
+          </div>
+
+          <div className="flex flex-wrap gap-3 md:flex md:gap-4">
+            <a href="#contact" className="rounded-xl bg-amber-500 px-6 py-3 text-xs font-bold uppercase tracking-[0.2em] text-slate-950 transition-colors hover:bg-amber-400 md:hidden">
+              Obtenir un entretien
             </a>
-            <a href="#services" className="px-8 py-4 border-2 border-white/50 hover:border-white hover:bg-white/10 text-white font-bold rounded-xl transition-all backdrop-blur-sm">
-              Découvrir mon expertise
+            <a href="#services" className="rounded-xl border border-white/25 px-6 py-3 text-xs font-bold uppercase tracking-[0.2em] text-white transition-colors hover:border-amber-400 hover:bg-white/10 md:hidden">
+              Consulter l'expertise
+            </a>
+            <a href="/projets" className="rounded-xl border border-white/25 px-6 py-3 text-xs font-bold uppercase tracking-[0.2em] text-white transition-colors hover:border-amber-400 hover:bg-white/10 md:hidden">
+              Mes realisations
+            </a>
+            <a href="#contact" className="hidden rounded-xl bg-amber-500 px-8 py-4 text-sm font-bold uppercase tracking-[0.2em] text-slate-950 transition-colors hover:bg-amber-400 md:inline-flex">
+              Demander une audience
+            </a>
+            <a href="#services" className="hidden rounded-xl border border-white/25 px-8 py-4 text-sm font-bold uppercase tracking-[0.2em] text-white transition-colors hover:border-amber-400 hover:bg-white/10 md:inline-flex">
+              Consulter l'expertise
             </a>
           </div>
         </div>
 
-        {/* Citation flottante à droite */}
-        <div className="relative hidden md:flex items-center justify-center">
-          <div className="bg-slate-900/70 backdrop-blur-md p-8 rounded-3xl shadow-2xl border border-white/20 max-w-md">
-            <div className="text-white text-lg font-medium italic mb-4 leading-relaxed">"La technologie n'est pas une fin, c'est le levier de notre dignité retrouvée."</div>
-            <div className="font-bold text-amber-400">— Charmant Nyungu K.</div>
+        <div className="relative hidden lg:block">
+          <div className="ml-auto max-w-lg">
+            <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-white/10 shadow-2xl backdrop-blur-md">
+              <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-amber-500/18 to-transparent" />
+              <div className="grid gap-0">
+                <div className="relative h-[420px] overflow-hidden">
+                  <img
+                    src="/photos/IMG_1838.jpg"
+                    alt="Charmant Nyungu K. - Portrait officiel"
+                    className="h-full w-full object-cover object-[32%_18%] scale-[1.04]"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/18 to-transparent" />
+                  <div className="absolute bottom-0 left-0 right-0 p-8">
+                    <div className="mb-3 text-[11px] font-bold uppercase tracking-[0.3em] text-amber-300">
+                      Message de vision
+                    </div>
+                    <p className="max-w-md text-2xl font-semibold leading-tight text-white">
+                      "La modernite africaine se construira par des institutions fortes et des systemes numeriques souverains."
+                    </p>
+                  </div>
+                </div>
+                <div className="grid grid-cols-3 border-t border-white/10 bg-slate-950/75">
+                  {[
+                    { value: 'IA', label: 'Gouvernance' },
+                    { value: 'Data', label: 'Decision' },
+                    { value: 'Cyber', label: 'Resilience' },
+                  ].map((item) => (
+                    <div key={item.value} className="border-r border-white/10 px-5 py-5 last:border-r-0">
+                      <div className="text-lg font-black uppercase tracking-[0.2em] text-amber-300">{item.value}</div>
+                      <div className="mt-1 text-xs uppercase tracking-[0.2em] text-white/65">{item.label}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <div className="absolute -left-10 bottom-10 max-w-xs rounded-2xl border border-white/10 bg-slate-950/85 p-6 backdrop-blur-md">
+              <div className="mb-2 text-[11px] font-bold uppercase tracking-[0.28em] text-amber-300">
+                Priorite
+              </div>
+              <p className="text-sm leading-relaxed text-white/80">
+                Faire converger leadership public, excellence technique et souverainete numerique dans un meme cap strategique.
+              </p>
+            </div>
           </div>
         </div>
       </div>
+
     </section>
   );
 };

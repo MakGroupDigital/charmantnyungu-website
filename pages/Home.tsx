@@ -23,30 +23,56 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
       <Hero />
       
       {/* Section Partenaire Stratégique */}
-      <section className="py-24 bg-white">
+      <section className="border-b border-slate-200 bg-white py-24">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+          <div className="mb-14 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+            <div className="max-w-3xl">
+              <p className="mb-4 text-sm font-bold uppercase tracking-[0.28em] text-amber-700">Cabinet & mission</p>
+              <h2 className="text-4xl md:text-5xl font-bold text-slate-900">Une parole d'autorite, une execution ancree dans le terrain.</h2>
+            </div>
+            <p className="max-w-2xl text-lg leading-relaxed text-slate-600">
+              Une offre pensee pour les institutions, les entreprises et les initiatives d'envergure qui veulent moderniser leurs outils
+              de decision, de protection et de transformation.
+            </p>
+          </div>
+
+          <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-16 items-center">
             <div>
-              <h2 className="text-4xl md:text-5xl font-bold mb-6 text-slate-900">Votre partenaire stratégique pour l'innovation</h2>
-              <p className="text-lg text-slate-600 mb-8 leading-relaxed">
-                De la conception à la livraison, je transforme vos idées en solutions technologiques performantes et adaptées aux réalités africaines.
+              <div className="mb-6 inline-flex rounded-full bg-amber-50 px-4 py-2 text-xs font-bold uppercase tracking-[0.24em] text-amber-700">
+                Partenaire strategique
+              </div>
+              <h3 className="text-4xl md:text-5xl font-bold mb-6 text-slate-900">Votre partenaire de confiance pour l'innovation structurelle.</h3>
+              <p className="text-lg text-slate-600 mb-10 leading-relaxed">
+                De la conception a la livraison, chaque mission est pensee comme un chantier de transformation durable:
+                gouvernance numerique, architecture de solutions, maitrise des donnees et souverainete operationnelle.
               </p>
               <div className="grid sm:grid-cols-2 gap-6">
                  {[
-                   { title: "Conception Stratégique", desc: "Architecture de solutions innovantes basées sur l'IA et la data science." },
-                   { title: "Développement Expert", desc: "Création de plateformes web et mobiles haute performance." },
-                   { title: "Déploiement & Scale", desc: "Accompagnement vers la croissance avec un support continu." }
+                   { title: "Conception Strategique", desc: "Architecture de solutions prioritaires pour administrations, entreprises et projets a impact." },
+                   { title: "Execution Technique", desc: "Creation de plateformes, outils et systemes numeriques fiables, lisibles et performants." },
+                   { title: "Securisation", desc: "Protection des donnees, continuite numerique et vigilance cyber sur les actifs sensibles." },
+                   { title: "Transmission", desc: "Mentorat, cadrage et acculturation des equipes pour inscrire la transformation dans le temps." }
                  ].map((item, i) => (
-                   <div key={i} className="p-4 border-l-4 border-amber-500 bg-slate-50">
-                     <h4 className="font-bold mb-1">{item.title}</h4>
-                     <p className="text-sm text-slate-600">{item.desc}</p>
+                   <div key={i} className="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+                     <h4 className="mb-2 text-base font-bold text-slate-900">{item.title}</h4>
+                     <p className="text-sm leading-relaxed text-slate-600">{item.desc}</p>
                    </div>
                  ))}
               </div>
             </div>
-            <div className="bg-slate-50 p-8 rounded-3xl border border-slate-100">
-               <h3 className="text-2xl font-bold mb-8 text-slate-900 border-b pb-4">Portfolio de Réussites</h3>
-               <div className="space-y-6">
+            <div className="overflow-hidden rounded-[2rem] border border-slate-200 bg-slate-50">
+               <div className="grid gap-0 md:grid-cols-[0.9fr_1.1fr]">
+                 <div className="relative min-h-[320px]">
+                   <img src="/photos/IMG_7908.JPG" className="h-full w-full object-cover" alt="Charmant Nyungu K. - Presence institutionnelle" />
+                   <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-slate-900/15 to-transparent"></div>
+                   <div className="absolute bottom-0 left-0 right-0 p-6">
+                     <div className="text-[11px] font-bold uppercase tracking-[0.28em] text-amber-300">Presence</div>
+                     <div className="mt-2 text-2xl font-bold text-white">Leadership, rigueur et impact public.</div>
+                   </div>
+                 </div>
+                 <div className="p-8">
+                   <h3 className="text-2xl font-bold mb-8 text-slate-900 border-b border-slate-200 pb-4">Portfolio de realisations</h3>
+                   <div className="space-y-6">
                  {[
                    { name: "E Régie PRV", tag: "GovTech", desc: "Plateforme fiscale gouvernementale moderne." },
                    { name: "Allo Livreur", tag: "Logistique", desc: "Écosystème intelligent pour l'optimisation des livraisons." },
@@ -61,8 +87,10 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
                      <span className="text-[10px] font-bold uppercase tracking-widest bg-amber-100 text-amber-700 px-2 py-1 rounded">{proj.tag}</span>
                    </div>
                  ))}
+                   </div>
+                   <button onClick={() => handleNavigation('projects')} className="w-full mt-8 py-3 border border-slate-200 text-slate-600 font-bold rounded-xl hover:bg-slate-900 hover:text-white transition-all text-sm uppercase tracking-widest">Voir tous les projets</button>
+                 </div>
                </div>
-               <button onClick={() => handleNavigation('projects')} className="w-full mt-8 py-3 border border-slate-200 text-slate-600 font-bold rounded-xl hover:bg-slate-900 hover:text-white transition-all text-sm uppercase tracking-widest">Voir tous les projets</button>
             </div>
           </div>
         </div>
