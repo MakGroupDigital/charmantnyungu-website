@@ -42,26 +42,34 @@ const Services: React.FC = () => {
   ];
 
   return (
-    <section id="services" className="py-24 bg-slate-50 relative overflow-hidden">
+    <section id="services" className="cnk-section py-24 md:py-32 bg-slate-950 relative overflow-hidden text-white">
+      <div className="absolute inset-0 opacity-[0.18]">
+        <img src="/photos/IMG_1837.jpg" className="h-full w-full object-cover" alt="Texture institutionnelle" />
+        <div className="absolute inset-0 bg-slate-950/80"></div>
+      </div>
       <div className="max-w-7xl mx-auto px-6 relative z-10">
-        <div className="text-center mb-20">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-slate-900">Expertise Institutionnelle</h2>
-            <div className="w-20 h-1 bg-amber-500 mx-auto mb-8"></div>
-            <p className="text-slate-600 max-w-2xl mx-auto text-lg leading-relaxed">
+        <div className="mb-20 grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-end">
+          <div>
+            <p className="cnk-kicker mb-5 text-amber-300">Expertise</p>
+            <h2 className="text-4xl md:text-6xl font-bold text-white">Expertise institutionnelle</h2>
+          </div>
+            <p className="text-white/66 max-w-2xl text-lg leading-relaxed lg:ml-auto">
               Une approche rigoureuse qui mêle pragmatisme technique et ambition politique pour une Afrique souveraine.
             </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
           {services.map((service, index) => (
-            <div key={index} className="p-8 rounded-3xl bg-white border border-slate-200 hover:border-amber-500/50 hover:shadow-xl transition-all group">
-              <div className="w-16 h-16 rounded-2xl bg-amber-50 flex items-center justify-center text-amber-600 mb-6 group-hover:bg-amber-500 group-hover:text-white transition-all duration-300">
+            <div key={index} className="group relative min-h-[310px] overflow-hidden rounded-2xl border border-white/10 bg-white/[0.055] p-7 backdrop-blur-md transition-all hover:-translate-y-1 hover:border-amber-300/50 hover:bg-white/[0.085]">
+              <div className="absolute right-5 top-5 font-body text-[11px] font-black uppercase tracking-[0.28em] text-white/20">0{index + 1}</div>
+              <div className="mb-10 flex h-14 w-14 items-center justify-center rounded-2xl border border-amber-300/25 bg-amber-300/10 text-amber-300 transition-all duration-300 group-hover:bg-amber-400 group-hover:text-slate-950">
                 {service.icon}
               </div>
-              <h3 className="text-xl font-bold mb-4 text-slate-900">{service.title}</h3>
-              <p className="text-slate-600 text-sm leading-relaxed">
+              <h3 className="text-2xl font-bold mb-4 text-white">{service.title}</h3>
+              <p className="text-white/62 text-sm leading-relaxed">
                 {service.description}
               </p>
+              <div className="absolute bottom-0 left-0 h-1 w-0 bg-amber-400 transition-all duration-300 group-hover:w-full"></div>
             </div>
           ))}
         </div>

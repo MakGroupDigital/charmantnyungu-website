@@ -4,10 +4,6 @@ import React from 'react';
 const Projects: React.FC = () => {
   const projects = [
     { title: "Clara.ai", desc: "Modèle LLM RH basé sur l'IA : tri de CV, recrutement, entretiens vidéo.", category: "IA / RH" },
-    { title: "E Régie PRV", desc: "Plateforme fiscale gouvernementale modernisant la collecte des impôts.", category: "GovTech" },
-    { title: "Allo Livreur", desc: "Écosystème logistique intelligent pour l'optimisation des livraisons.", category: "Logistique" },
-    { title: "Elenge.cd", desc: "Média numérique panafricain pour la jeunesse et l'entrepreneuriat.", category: "Media" },
-    { title: "YA BISO APP", desc: "Plateforme de promotion du tourisme et de la culture congolaise.", category: "Tourisme" },
     { title: "Zua-Car", desc: "Solution automobile tout-en-un pour le marché africain.", category: "E-commerce" },
     { title: "Système Identification Anciens Combattants", desc: "Solution pour l'enregistrement et la gestion sécurisée.", category: "Gouvernance" },
     { title: "Mosala App", desc: "Application dédiée à l'emploi et à la mise en relation des talents.", category: "Emploi" },

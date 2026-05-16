@@ -10,6 +10,7 @@ interface NavbarProps {
 const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentPage }) => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const immersiveUrl = 'http://localhost:8080/';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -61,39 +62,64 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentPage }) => {
   ];
 
   return (
-    <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled || mobileMenuOpen ? 'bg-white/90 backdrop-blur-md py-4 shadow-sm border-b border-slate-100' : 'bg-transparent py-6'}`}>
-      <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
+    <nav className="pointer-events-none fixed inset-x-0 top-3 z-50 px-3 transition-all duration-300 sm:top-4 sm:px-5">
+      <div
+        className={`pointer-events-auto mx-auto max-w-[92rem] overflow-hidden rounded-[1.35rem] border transition-all duration-300 ${
+          scrolled || mobileMenuOpen
+            ? 'border-slate-200/80 bg-white/[0.92] shadow-[0_24px_80px_rgba(15,23,42,0.16)] backdrop-blur-2xl'
+            : 'border-white/15 bg-slate-950/[0.20] shadow-[0_20px_70px_rgba(2,6,23,0.16)] backdrop-blur-xl'
+        }`}
+      >
+        <div className={`flex items-center justify-between gap-4 px-4 transition-all duration-300 sm:px-5 lg:px-6 ${scrolled || mobileMenuOpen ? 'py-3' : 'py-3.5'}`}>
         <button 
             onClick={() => handleNavigation('home')}
-            className="group text-left"
+            className="group flex min-w-0 items-center gap-3 text-left"
         >
-          <span className="block text-xl font-black uppercase tracking-[0.18em] text-slate-900 transition-colors group-hover:text-amber-600 sm:text-2xl">
-            Charmant Nyungu K.
+          <span className={`grid h-11 w-11 flex-shrink-0 place-items-center overflow-hidden rounded-2xl border p-1.5 transition-all ${
+            scrolled || mobileMenuOpen
+              ? 'border-slate-200 bg-slate-950'
+              : 'border-white/15 bg-white/10'
+          }`}>
+            <img src="/cnk-mark.svg" alt="CNK" className="h-full w-full" />
+          </span>
+          <span className="min-w-0">
+            <span className={`block truncate text-sm font-black uppercase tracking-[0.16em] transition-colors group-hover:text-amber-600 sm:text-base lg:text-lg ${scrolled || mobileMenuOpen ? 'text-slate-900' : 'text-slate-900 md:text-white'}`}>
+              Charmant Nyungu K.
+            </span>
+            <span className={`hidden text-[10px] font-bold uppercase tracking-[0.22em] sm:block ${scrolled || mobileMenuOpen ? 'text-slate-400' : 'text-white/45'}`}>
+              Innovation & souverainete numerique
+            </span>
           </span>
         </button>
         
-        <div className="hidden md:flex gap-6 lg:gap-8">
+        <div className={`hidden md:flex items-center gap-1 rounded-2xl border p-1.5 backdrop-blur-xl transition-all ${scrolled ? 'border-slate-200 bg-slate-50/80' : 'border-white/10 bg-white/[0.07]'}`}>
           {navLinks.map((link) => (
             <button 
               key={link.id} 
               onClick={() => handleNavigation(link.id)}
-              className={`text-xs font-bold transition-colors uppercase tracking-widest ${currentPage === link.id ? 'text-amber-600 border-b-2 border-amber-500' : 'text-slate-500 hover:text-amber-600'}`}
+              className={`rounded-xl px-2.5 py-2 text-[10px] font-bold transition-colors uppercase tracking-widest lg:px-3 xl:px-4 ${currentPage === link.id ? 'bg-amber-500 text-slate-950 shadow-sm' : scrolled ? 'text-slate-500 hover:bg-white hover:text-slate-900' : 'text-white/[0.72] hover:bg-white/10 hover:text-white'}`}
             >
               {link.label}
             </button>
           ))}
           <button 
              onClick={handleContactNavigation}
-             className="bg-slate-900 text-white px-5 py-2 rounded-lg text-xs font-bold uppercase tracking-widest hover:bg-amber-600 transition-colors"
+             className="ml-1 rounded-xl bg-slate-950 px-4 py-2.5 text-[10px] font-bold uppercase tracking-widest text-white shadow-lg shadow-slate-950/10 transition-colors hover:bg-amber-600 xl:px-5"
           >
             Contact
           </button>
+          <a
+            href={immersiveUrl}
+            className="ml-1 rounded-xl border border-amber-300/60 bg-amber-400 px-4 py-2.5 text-[10px] font-black uppercase tracking-widest text-slate-950 shadow-lg shadow-amber-900/10 transition-all hover:-translate-y-0.5 hover:bg-amber-300 xl:px-5"
+          >
+            Version immersive
+          </a>
         </div>
 
         <div className="md:hidden">
             <button 
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="text-slate-900 p-2"
+              className={`rounded-2xl border p-2 transition-colors ${scrolled || mobileMenuOpen ? 'border-slate-200 bg-slate-50 text-slate-900' : 'border-white/15 bg-white/10 text-slate-900'}`}
               aria-expanded={mobileMenuOpen}
               aria-controls="mobile-navigation"
               aria-label={mobileMenuOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
@@ -114,9 +140,9 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentPage }) => {
       {mobileMenuOpen && (
         <div
           id="mobile-navigation"
-          className="md:hidden border-t border-slate-200 bg-white/95 backdrop-blur-md"
+          className="md:hidden border-t border-slate-200 bg-white/[0.96] backdrop-blur-xl"
         >
-          <div className="max-w-7xl mx-auto px-6 py-4 flex flex-col gap-2">
+          <div className="px-4 py-4 flex flex-col gap-2">
             {navLinks.map((link) => (
               <button
                 key={link.id}
@@ -136,9 +162,16 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentPage }) => {
             >
               Contact
             </button>
+            <a
+              href={immersiveUrl}
+              className="rounded-lg bg-amber-500 px-4 py-3 text-center text-sm font-black uppercase tracking-widest text-slate-950 transition-colors hover:bg-amber-400"
+            >
+              Acceder a la version immersive
+            </a>
           </div>
         </div>
       )}
+      </div>
     </nav>
   );
 };

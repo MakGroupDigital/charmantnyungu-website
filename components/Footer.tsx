@@ -14,19 +14,26 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
   };
 
   return (
-    <footer id="contact" className="py-20 bg-white border-t border-slate-200">
-      <div className="max-w-7xl mx-auto px-6">
+    <footer id="contact" className="relative overflow-hidden border-t border-white/10 bg-slate-950 py-20 text-white">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_0%,rgba(245,158,11,0.18),transparent_34%)]"></div>
+      <div className="relative z-10 max-w-7xl mx-auto px-6">
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
           <div className="lg:col-span-2">
-            <button onClick={() => handleNavigation('home')} className="text-3xl font-bold tracking-tighter mb-6 block text-slate-900 text-left">
-              <span className="text-amber-600 italic">Charmant</span> Nyungu K.
+            <button onClick={() => handleNavigation('home')} className="mb-6 flex items-center gap-4 text-left text-white">
+              <span className="grid h-14 w-14 overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-2">
+                <img src="/cnk-mark.svg" alt="CNK" className="h-full w-full" />
+              </span>
+              <span>
+                <span className="block text-3xl font-bold tracking-tighter"><span className="text-amber-500 italic">Charmant</span> Nyungu K.</span>
+                <span className="mt-1 block text-[10px] font-bold uppercase tracking-[0.24em] text-white/42">Innovation & souverainete numerique</span>
+              </span>
             </button>
-            <p className="text-slate-600 max-w-sm mb-8 leading-relaxed">
+            <p className="text-white/62 max-w-sm mb-8 leading-relaxed">
               Bâtissons ensemble les fondations de l'Afrique de demain, un octet à la fois, une idée à la fois.
             </p>
             <div className="flex gap-6">
               {['LinkedIn', 'Twitter', 'Medium', 'WhatsApp'].map(social => (
-                <a key={social} href={social === 'WhatsApp' ? 'https://wa.me/243835137837?text=Bonjour%20Charmant' : '#'} className="text-slate-400 hover:text-amber-600 transition-colors text-[10px] uppercase font-bold tracking-widest">
+                <a key={social} href={social === 'WhatsApp' ? 'https://wa.me/243835137837?text=Bonjour%20Charmant' : '#'} className="text-white/42 hover:text-amber-300 transition-colors text-[10px] uppercase font-bold tracking-widest">
                   {social}
                 </a>
               ))}
@@ -34,8 +41,8 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
           </div>
           
           <div>
-            <h4 className="text-slate-900 font-bold mb-6 uppercase text-xs tracking-[0.2em]">Contact</h4>
-            <ul className="space-y-4 text-slate-600 text-sm">
+            <h4 className="text-white font-bold mb-6 uppercase text-xs tracking-[0.2em]">Contact</h4>
+            <ul className="space-y-4 text-white/62 text-sm">
               <li className="flex items-center gap-2">
                 <svg className="w-4 h-4 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
                 consultant@charmantnyungu.com
@@ -52,8 +59,8 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
           </div>
 
           <div>
-            <h4 className="text-slate-900 font-bold mb-6 uppercase text-xs tracking-[0.2em]">Navigation</h4>
-            <ul className="space-y-3 text-slate-600 text-sm font-medium">
+            <h4 className="text-white font-bold mb-6 uppercase text-xs tracking-[0.2em]">Navigation</h4>
+            <ul className="space-y-3 text-white/62 text-sm font-medium">
               <li><button onClick={() => handleNavigation('about')} className="hover:text-amber-600 transition-colors">À Propos</button></li>
               <li><button onClick={() => handleNavigation('expertise')} className="hover:text-amber-600 transition-colors">Expertise</button></li>
               <li><button onClick={() => handleNavigation('projects')} className="hover:text-amber-600 transition-colors">Projets</button></li>
@@ -65,7 +72,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
           </div>
         </div>
         
-        <div className="pt-8 border-t border-slate-100 flex flex-col md:flex-row justify-between items-center gap-4 text-slate-400 text-[10px] uppercase font-bold tracking-widest">
+        <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-white/38 text-[10px] uppercase font-bold tracking-widest">
           <div>&copy; {new Date().getFullYear()} Charmant Nyungu K. - Tous droits réservés.</div>
           <div className="flex gap-4">
              <button onClick={() => handleNavigation('legal')}>Politique de Confidentialité</button>

@@ -1,4 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-label="CNK">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title desc">
+  <title id="title">Logo CNK</title>
+  <desc id="desc">Monogramme CNK moderne en or et noir profond.</desc>
   <defs>
     <linearGradient id="cnkGold" x1="42" y1="30" x2="214" y2="226" gradientUnits="userSpaceOnUse">
       <stop offset="0" stop-color="#FCD34D"/>
@@ -9,9 +11,12 @@
       <stop offset="0" stop-color="#1E293B"/>
       <stop offset="1" stop-color="#020617"/>
     </linearGradient>
+    <filter id="softShadow" x="-18%" y="-18%" width="136%" height="136%">
+      <feDropShadow dx="0" dy="14" stdDeviation="14" flood-color="#020617" flood-opacity="0.24"/>
+    </filter>
   </defs>
   <rect width="256" height="256" rx="62" fill="url(#cnkInk)"/>
-  <path d="M202 48C181 31 153 22 124 27 69 35 32 82 39 138c7 54 55 93 110 86 18-2 35-9 49-19" fill="none" stroke="url(#cnkGold)" stroke-width="17" stroke-linecap="round"/>
+  <path d="M202 48C181 31 153 22 124 27 69 35 32 82 39 138c7 54 55 93 110 86 18-2 35-9 49-19" fill="none" stroke="url(#cnkGold)" stroke-width="17" stroke-linecap="round" filter="url(#softShadow)"/>
   <path d="M80 185V72l96 112V71" fill="none" stroke="#F8FAFC" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"/>
   <path d="M177 128l40-55M177 128l43 58" fill="none" stroke="url(#cnkGold)" stroke-width="17" stroke-linecap="round" stroke-linejoin="round"/>
   <path d="M54 205h148" fill="none" stroke="#F59E0B" stroke-width="7" stroke-linecap="round" opacity="0.72"/>

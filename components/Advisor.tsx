@@ -47,21 +47,25 @@ const Advisor: React.FC = () => {
   };
 
   return (
-    <section id="advisor" className="py-24 bg-slate-50">
-      <div className="max-w-4xl mx-auto px-6">
+    <section id="advisor" className="cnk-section py-24 md:py-32 bg-slate-50">
+      <div className="relative z-10 max-w-5xl mx-auto px-6">
         <div className="text-center mb-12">
-            <div className="w-24 h-24 mx-auto mb-6 rounded-full overflow-hidden border-4 border-amber-500 shadow-xl">
+            <div className="w-24 h-24 mx-auto mb-6 rounded-full overflow-hidden border-4 border-white shadow-2xl ring-4 ring-amber-400/35">
               <img src="/photos/IMG_2227.JPG" className="w-full h-full object-cover" alt="Charmant Nyungu K. - AI Advisor" />
             </div>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-slate-900">Innovation Advisor <span className="text-amber-600">AI</span></h2>
+            <p className="cnk-kicker mb-5 justify-center text-amber-700">Conversation augmentee</p>
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-slate-950">Innovation Advisor <span className="text-amber-600">AI</span></h2>
             <p className="text-slate-600">Dialogue intelligent sur la transformation digitale africaine.</p>
         </div>
 
-        <div className="bg-white rounded-3xl border border-slate-200 shadow-xl overflow-hidden flex flex-col h-[600px]">
-          <div ref={scrollRef} className="flex-1 p-6 space-y-4 overflow-y-auto bg-slate-50/30">
+        <div className="cnk-card rounded-[1.75rem] overflow-hidden flex flex-col h-[600px]">
+          <div className="border-b border-slate-200 bg-slate-950 px-6 py-4 text-xs font-bold uppercase tracking-[0.24em] text-white/70">
+            Console stratégique privée
+          </div>
+          <div ref={scrollRef} className="flex-1 p-6 space-y-4 overflow-y-auto bg-slate-50/50">
             {messages.map((msg, idx) => (
               <div key={idx} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                <div className={`max-w-[80%] p-4 rounded-2xl shadow-sm ${msg.role === 'user' ? 'bg-amber-600 text-white font-medium' : 'bg-white border border-slate-100 text-slate-800'}`}>
+                <div className={`max-w-[80%] rounded-2xl p-4 shadow-sm ${msg.role === 'user' ? 'bg-amber-600 text-white font-medium' : 'bg-white border border-slate-100 text-slate-800'}`}>
                   {msg.text}
                 </div>
               </div>
@@ -82,12 +86,12 @@ const Advisor: React.FC = () => {
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && handleSend()}
               placeholder="Posez votre question stratégique..."
-              className="flex-1 bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-800 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all"
+              className="flex-1 bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-800 focus:outline-none focus:border-amber-500 focus:ring-4 focus:ring-amber-100 transition-all"
             />
             <button 
               onClick={handleSend}
               disabled={isLoading}
-              className="bg-slate-900 hover:bg-slate-800 disabled:opacity-50 text-white px-6 rounded-xl font-bold transition-colors shadow-md"
+              className="bg-slate-950 hover:bg-amber-600 disabled:opacity-50 text-white px-6 rounded-xl font-bold transition-colors shadow-md"
             >
               Envoyer
             </button>

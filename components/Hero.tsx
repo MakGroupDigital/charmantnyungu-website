@@ -64,7 +64,7 @@ const Hero: React.FC = () => {
             <span className="block text-amber-400">et panafricaniste</span>
           </h1>
 
-          <div className="mb-8 hidden rounded-2xl border border-white/10 bg-white/8 p-5 backdrop-blur-md md:block">
+          <div className="mb-8 hidden rounded-2xl border border-white/10 bg-white/[0.08] p-5 backdrop-blur-md md:block">
             <div className="mb-3 text-[11px] font-bold uppercase tracking-[0.28em] text-amber-300">
               Orientation du moment
             </div>
@@ -108,6 +108,9 @@ const Hero: React.FC = () => {
             </a>
             <a href="#services" className="hidden rounded-xl border border-white/25 px-8 py-4 text-sm font-bold uppercase tracking-[0.2em] text-white transition-colors hover:border-amber-400 hover:bg-white/10 md:inline-flex">
               Consulter l'expertise
+            </a>
+            <a href="http://localhost:8080/" className="hidden rounded-xl border border-amber-300/70 bg-white/10 px-8 py-4 text-sm font-black uppercase tracking-[0.2em] text-amber-200 shadow-2xl shadow-amber-950/20 backdrop-blur-md transition-all hover:-translate-y-0.5 hover:bg-amber-400 hover:text-slate-950 md:inline-flex">
+              Acceder a la version immersive
             </a>
           </div>
         </div>
