@@ -76,7 +76,15 @@
   ],
   "rewrites": [
     {
-      "source": "/((?!api|photos|favicon|og-image|manifest\\.json|robots|sitemap).*)",
+      "source": "/immersive",
+      "destination": "/immersive/index.html"
+    },
+    {
+      "source": "/immersive/",
+      "destination": "/immersive/index.html"
+    },
+    {
+      "source": "/((?!api|photos|immersive|favicon|og-image|manifest\\.json|robots|sitemap).*)",
       "destination": "/index.html"
     }
   ],

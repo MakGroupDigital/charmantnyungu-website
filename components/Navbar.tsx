@@ -10,7 +10,7 @@ interface NavbarProps {
 const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentPage }) => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const immersiveUrl = 'http://localhost:8080/';
+  const immersiveUrl = '/immersive/index.html';
 
   useEffect(() => {
     const handleScroll = () => {

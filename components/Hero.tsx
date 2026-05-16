@@ -109,7 +109,7 @@ const Hero: React.FC = () => {
             <a href="#services" className="hidden rounded-xl border border-white/25 px-8 py-4 text-sm font-bold uppercase tracking-[0.2em] text-white transition-colors hover:border-amber-400 hover:bg-white/10 md:inline-flex">
               Consulter l'expertise
             </a>
-            <a href="http://localhost:8080/" className="hidden rounded-xl border border-amber-300/70 bg-white/10 px-8 py-4 text-sm font-black uppercase tracking-[0.2em] text-amber-200 shadow-2xl shadow-amber-950/20 backdrop-blur-md transition-all hover:-translate-y-0.5 hover:bg-amber-400 hover:text-slate-950 md:inline-flex">
+            <a href="/immersive/index.html" className="hidden rounded-xl border border-amber-300/70 bg-white/10 px-8 py-4 text-sm font-black uppercase tracking-[0.2em] text-amber-200 shadow-2xl shadow-amber-950/20 backdrop-blur-md transition-all hover:-translate-y-0.5 hover:bg-amber-400 hover:text-slate-950 md:inline-flex">
               Acceder a la version immersive
             </a>
           </div>
