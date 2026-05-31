@@ -1,14 +1,17 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { onValue, ref, runTransaction } from 'firebase/database';
+import { realtimeDatabase } from '../services/firebase';
 
 const MANIFESTO_PDF = '/manifeste-etre-artificiel-autonome.pdf';
 const COVER_IMAGE = 'https://res.cloudinary.com/dy73hzkpm/image/upload/v1777539703/IMG_3306_ulsv8q.png';
-const STATS_ENDPOINT = '/api/manifeste-stats';
+const STATS_PATH = 'manifesteStats';
 const STORAGE_KEYS = {
   reads: 'manifeste_reads_count',
   downloads: 'manifeste_downloads_count',
   shares: 'manifeste_shares_count',
-  readTracked: 'manifeste_read_tracked_session',
 };
+type ManifestMetric = 'reads' | 'downloads' | 'shares';
+let readTrackedForCurrentPageLoad = false;
 
 const Manifeste: React.FC = () => {
   const readerRef = useRef<HTMLElement | null>(null);
@@ -20,7 +23,7 @@ const Manifeste: React.FC = () => {
   const shareTitle = "Etre Artificiel Autonome | L'IA d'ici 2070";
   const shareText = "Decouvrez le manifeste de Charmant Nyungu K. sur l'emergence de l'etre artificiel autonome.";
 
-  const incrementLocalMetric = (metric: 'reads' | 'downloads' | 'shares') => {
+  const incrementLocalMetric = (metric: ManifestMetric) => {
     const storageKey =
       metric === 'reads'
         ? STORAGE_KEYS.reads
@@ -50,71 +53,52 @@ const Manifeste: React.FC = () => {
     setStatsSource('local');
   };
 
-  const incrementRemoteMetric = async (metric: 'reads' | 'downloads' | 'shares') => {
-    const response = await fetch(STATS_ENDPOINT, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ metric }),
+  const incrementRemoteMetric = async (metric: ManifestMetric) => {
+    const metricRef = ref(realtimeDatabase, `${STATS_PATH}/${metric}`);
+    const result = await runTransaction(metricRef, (currentValue) => {
+      return Number(currentValue || 0) + 1;
     });
 
-    if (!response.ok) {
-      throw new Error('Remote stats update failed');
+    if (!result.committed) {
+      throw new Error('Firebase stats update was not committed');
     }
 
-    const data = await response.json();
-
-    if (!data.persisted || data.count === null) {
-      throw new Error('Remote stats backend not configured');
-    }
+    const nextValue = Number(result.snapshot.val() || 0);
 
     if (metric === 'reads') {
-      setReadCount(Number(data.count));
+      setReadCount(nextValue);
     } else if (metric === 'downloads') {
-      setDownloadCount(Number(data.count));
+      setDownloadCount(nextValue);
     } else {
-      setShareCount(Number(data.count));
+      setShareCount(nextValue);
     }
 
     setStatsSource('global');
   };
 
   useEffect(() => {
-    const initializeStats = async () => {
-      try {
-        const response = await fetch(STATS_ENDPOINT);
+    const statsRef = ref(realtimeDatabase, STATS_PATH);
+    const unsubscribe = onValue(
+      statsRef,
+      (snapshot) => {
+        const stats = snapshot.val() || {};
 
-        if (!response.ok) {
-          throw new Error('Unable to load remote stats');
-        }
-
-        const data = await response.json();
-
-        if (data.persisted && data.reads !== null && data.downloads !== null && data.shares !== null) {
-          setReadCount(Number(data.reads));
-          setDownloadCount(Number(data.downloads));
-          setShareCount(Number(data.shares));
-          setStatsSource('global');
-        } else {
-          loadLocalStats();
-        }
-      } catch {
+        setReadCount(Number(stats.reads || 0));
+        setDownloadCount(Number(stats.downloads || 0));
+        setShareCount(Number(stats.shares || 0));
+        setStatsSource('global');
+      },
+      () => {
         loadLocalStats();
       }
+    );
 
-      if (!sessionStorage.getItem(STORAGE_KEYS.readTracked)) {
-        try {
-          await incrementRemoteMetric('reads');
-        } catch {
-          incrementLocalMetric('reads');
-        }
+    if (!readTrackedForCurrentPageLoad) {
+      readTrackedForCurrentPageLoad = true;
+      incrementRemoteMetric('reads').catch(() => incrementLocalMetric('reads'));
+    }
 
-        sessionStorage.setItem(STORAGE_KEYS.readTracked, 'true');
-      }
-    };
-
-    initializeStats();
+    return unsubscribe;
   }, []);
 
   const scrollToReader = () => {
