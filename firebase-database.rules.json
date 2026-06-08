@@ -1,6 +1,20 @@
 {
   "rules": {
-    ".read": true,
-    ".write": true
+    "manifesteStats": {
+      ".read": true,
+      "$metric": {
+        ".write": "$metric === 'reads' || $metric === 'downloads' || $metric === 'shares'",
+        ".validate": "newData.isNumber()"
+      }
+    },
+    "coursePackagePayments": {
+      "$reference": {
+        ".read": true,
+        ".write": "newData.child('reference').val() === $reference",
+        ".validate": "newData.hasChildren(['reference', 'amount', 'currency', 'status', 'createdAt']) && newData.child('amount').val() === 44 && newData.child('currency').val() === 'USD' && (newData.child('status').val() === 'pending' || newData.child('status').val() === 'completed' || newData.child('status').val() === 'failed' || newData.child('status').val() === 'cancelled' || newData.child('status').val() === 'declined')"
+      }
+    },
+    ".read": false,
+    ".write": false
   }
 }

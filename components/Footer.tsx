@@ -64,6 +64,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               <li><button onClick={() => handleNavigation('about')} className="hover:text-amber-600 transition-colors">À Propos</button></li>
               <li><button onClick={() => handleNavigation('expertise')} className="hover:text-amber-600 transition-colors">Expertise</button></li>
               <li><button onClick={() => handleNavigation('projects')} className="hover:text-amber-600 transition-colors">Projets</button></li>
+              <li><button onClick={() => handleNavigation('courses')} className="hover:text-amber-600 transition-colors">Package cours complet</button></li>
               <li><button onClick={() => handleNavigation('manifeste')} className="hover:text-amber-600 transition-colors">Manifeste</button></li>
               <li><button onClick={() => handleNavigation('tribune')} className="hover:text-amber-600 transition-colors">Tribune</button></li>
               <li><button onClick={() => handleNavigation('gallery')} className="hover:text-amber-600 transition-colors">Galerie</button></li>

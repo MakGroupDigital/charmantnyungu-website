@@ -11,6 +11,7 @@ import Tribune from './pages/Tribune';
 import Legal from './pages/Legal';
 import Gallery from './pages/Gallery';
 import Manifeste from './pages/Manifeste';
+import CoursePackage from './pages/CoursePackage';
 import { getPageFromLocation, navigateToPage, PageType, syncLegacyHashRoute } from './utils/navigation';
 
 const App: React.FC = () => {
@@ -43,6 +44,7 @@ const App: React.FC = () => {
       case 'manifeste': return <Manifeste />;
       case 'legal': return <Legal />;
       case 'gallery': return <Gallery />;
+      case 'courses': return <CoursePackage />;
       default: return <Home onNavigate={(p) => setCurrentPage(p as PageType)} />;
     }
   };

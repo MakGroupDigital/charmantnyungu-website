@@ -51,6 +51,7 @@ coverage/
 *.pem
 .vercel
 .turbo
+private/course-package/*.pdf
 
 # TypeScript
 *.tsbuildinfo

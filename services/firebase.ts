@@ -5,7 +5,7 @@ import { getDatabase } from 'firebase/database';
 const firebaseConfig = {
   apiKey: 'AIzaSyCBZF1r8K4t8lVae2Q9whhQTrzt5E1UoAo',
   authDomain: 'charmantnyungu.firebaseapp.com',
-  databaseURL: 'https://charmantnyungu-default-rtdb.firebaseio.com',
+  databaseURL: 'https://charmantnyungu-default-rtdb.europe-west1.firebasedatabase.app',
   projectId: 'charmantnyungu',
   storageBucket: 'charmantnyungu.firebasestorage.app',
   messagingSenderId: '904397530480',

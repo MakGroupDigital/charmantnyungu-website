@@ -41,6 +41,18 @@
     <priority>0.8</priority>
   </url>
 
+  <!-- Package cours complet -->
+  <url>
+    <loc>https://charmantnyungu.com/package-cours-complet</loc>
+    <lastmod>2026-06-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.92</priority>
+    <image:image>
+      <image:loc>https://charmantnyungu.com/og-image.svg</image:loc>
+      <image:title>Package cours complet - Charmant Nyungu K.</image:title>
+    </image:image>
+  </url>
+
   <!-- Manifeste - Etre Artificiel Autonome -->
   <url>
     <loc>https://charmantnyungu.com/manifeste/etre-artificiel-autonome-ia-2070</loc>

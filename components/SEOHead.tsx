@@ -90,6 +90,12 @@ export const seoData = {
     keywords: "projets Charmant Nyungu, portfolio consultant, réalisations innovation, plateformes digitales Afrique, projets technologiques RDC, solutions IA, initiatives panafricaines, YBS Innovate",
     url: "https://charmantnyungu.com/projets"
   },
+  courses: {
+    title: "Package Cours Complet | Algorithmique, Python, Data, IA, Cybersecurite | Charmant Nyungu K.",
+    description: "Accedez au package complet de six manuels professionnels de Charmant Nyungu K. : algorithmique, Python, bases de donnees, architecture logicielle, cybersecurite defensive, data science et IA avancee.",
+    keywords: "cours Charmant Nyungu, formation Python RDC, algorithmique, bases de donnees, architecture logicielle, cybersecurite defensive, data science IA, package cours complet, formation informatique Afrique, manuels PDF technologie",
+    url: "https://charmantnyungu.com/package-cours-complet"
+  },
   manifeste: {
     title: "Manifeste | Etre Artificiel Autonome, l'IA d'ici 2070 | Charmant Nyungu K.",
     description: "Découvrez le manifeste de Charmant Nyungu K. sur l'émergence de l'être artificiel autonome, la conscience encadrée, l'éthique de l'IA et les enjeux de cohabitation entre intelligence humaine et intelligence artificielle d'ici 2070.",
