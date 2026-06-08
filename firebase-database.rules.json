@@ -3,7 +3,7 @@
     "manifesteStats": {
       ".read": true,
       "$metric": {
-        ".write": "$metric === 'reads' || $metric === 'downloads' || $metric === 'shares'",
+        ".write": "auth != null && ($metric === 'reads' || $metric === 'downloads' || $metric === 'shares')",
         ".validate": "newData.isNumber()"
       }
     },

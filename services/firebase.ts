@@ -1,5 +1,6 @@
 import { initializeApp } from 'firebase/app';
 import { getAnalytics, isSupported } from 'firebase/analytics';
+import { getAuth, signInAnonymously, type User } from 'firebase/auth';
 import { getDatabase } from 'firebase/database';
 
 const firebaseConfig = {
@@ -15,6 +16,30 @@ const firebaseConfig = {
 
 export const firebaseApp = initializeApp(firebaseConfig);
 export const realtimeDatabase = getDatabase(firebaseApp);
+export const firebaseAuth = getAuth(firebaseApp);
+
+let anonymousSessionPromise: Promise<User> | null = null;
+
+export const ensureAnonymousUser = async () => {
+  if (typeof window === 'undefined') {
+    return null;
+  }
+
+  if (firebaseAuth.currentUser) {
+    return firebaseAuth.currentUser;
+  }
+
+  if (!anonymousSessionPromise) {
+    anonymousSessionPromise = signInAnonymously(firebaseAuth)
+      .then((credential) => credential.user)
+      .catch((error) => {
+        anonymousSessionPromise = null;
+        throw error;
+      });
+  }
+
+  return anonymousSessionPromise;
+};
 
 if (typeof window !== 'undefined') {
   isSupported()

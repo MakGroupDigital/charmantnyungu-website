@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { onValue, ref, runTransaction } from 'firebase/database';
-import { realtimeDatabase } from '../services/firebase';
+import { ensureAnonymousUser, realtimeDatabase } from '../services/firebase';
 
 const MANIFESTO_PDF = '/manifeste-etre-artificiel-autonome.pdf';
 const COVER_IMAGE = 'https://res.cloudinary.com/dy73hzkpm/image/upload/v1777539703/IMG_3306_ulsv8q.png';
@@ -18,10 +18,16 @@ const Manifeste: React.FC = () => {
   const [readCount, setReadCount] = useState(0);
   const [downloadCount, setDownloadCount] = useState(0);
   const [shareCount, setShareCount] = useState(0);
-  const [statsSource, setStatsSource] = useState<'global' | 'local'>('local');
+  const [statsSource, setStatsSource] = useState<'global' | 'local' | 'syncing'>('syncing');
   const shareUrl = 'https://charmantnyungu.com/manifeste/etre-artificiel-autonome-ia-2070';
   const shareTitle = "Etre Artificiel Autonome | L'IA d'ici 2070";
   const shareText = "Decouvrez le manifeste de Charmant Nyungu K. sur l'emergence de l'etre artificiel autonome.";
+  const statsMessage = (globalMessage: string) =>
+    statsSource === 'global'
+      ? globalMessage
+      : statsSource === 'syncing'
+        ? 'Synchronisation du compteur global en cours.'
+        : 'Mode secours local: la connexion au compteur global a echoue.';
 
   const incrementLocalMetric = (metric: ManifestMetric) => {
     const storageKey =
@@ -46,6 +52,18 @@ const Manifeste: React.FC = () => {
     setStatsSource('local');
   };
 
+  const setMetricCount = (metric: ManifestMetric, count: number) => {
+    if (metric === 'reads') {
+      setReadCount(count);
+    } else if (metric === 'downloads') {
+      setDownloadCount(count);
+    } else {
+      setShareCount(count);
+    }
+
+    setStatsSource('global');
+  };
+
   const loadLocalStats = () => {
     setReadCount(Number(localStorage.getItem(STORAGE_KEYS.reads) || '0'));
     setDownloadCount(Number(localStorage.getItem(STORAGE_KEYS.downloads) || '0'));
@@ -53,7 +71,52 @@ const Manifeste: React.FC = () => {
     setStatsSource('local');
   };
 
+  const loadApiStats = async () => {
+    const response = await fetch('/api/manifeste-stats', {
+      method: 'GET',
+      headers: { Accept: 'application/json' },
+    });
+
+    if (!response.ok) {
+      throw new Error('Remote stats request failed');
+    }
+
+    const stats = await response.json();
+    if (!stats.persisted) {
+      throw new Error('Remote stats are not persisted');
+    }
+
+    setReadCount(Number(stats.reads || 0));
+    setDownloadCount(Number(stats.downloads || 0));
+    setShareCount(Number(stats.shares || 0));
+    setStatsSource('global');
+  };
+
+  const incrementApiMetric = async (metric: ManifestMetric) => {
+    const response = await fetch('/api/manifeste-stats', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ metric }),
+    });
+
+    if (!response.ok) {
+      throw new Error('Remote stats update failed');
+    }
+
+    const stats = await response.json();
+    if (!stats.persisted || typeof stats.count !== 'number') {
+      throw new Error('Remote stats update was not persisted');
+    }
+
+    setMetricCount(metric, Number(stats.count || 0));
+  };
+
   const incrementRemoteMetric = async (metric: ManifestMetric) => {
+    await ensureAnonymousUser();
+
     const metricRef = ref(realtimeDatabase, `${STATS_PATH}/${metric}`);
     const result = await runTransaction(metricRef, (currentValue) => {
       return Number(currentValue || 0) + 1;
@@ -64,20 +127,19 @@ const Manifeste: React.FC = () => {
     }
 
     const nextValue = Number(result.snapshot.val() || 0);
+    setMetricCount(metric, nextValue);
+  };
 
-    if (metric === 'reads') {
-      setReadCount(nextValue);
-    } else if (metric === 'downloads') {
-      setDownloadCount(nextValue);
-    } else {
-      setShareCount(nextValue);
-    }
-
-    setStatsSource('global');
+  const trackMetric = (metric: ManifestMetric) => {
+    incrementRemoteMetric(metric)
+      .catch(() => incrementApiMetric(metric))
+      .catch(() => incrementLocalMetric(metric));
   };
 
   useEffect(() => {
     const statsRef = ref(realtimeDatabase, STATS_PATH);
+    ensureAnonymousUser().catch(() => undefined);
+
     const unsubscribe = onValue(
       statsRef,
       (snapshot) => {
@@ -89,13 +151,13 @@ const Manifeste: React.FC = () => {
         setStatsSource('global');
       },
       () => {
-        loadLocalStats();
+        loadApiStats().catch(() => loadLocalStats());
       }
     );
 
     if (!readTrackedForCurrentPageLoad) {
       readTrackedForCurrentPageLoad = true;
-      incrementRemoteMetric('reads').catch(() => incrementLocalMetric('reads'));
+      trackMetric('reads');
     }
 
     return unsubscribe;
@@ -106,7 +168,7 @@ const Manifeste: React.FC = () => {
   };
 
   const handleDownload = () => {
-    incrementRemoteMetric('downloads').catch(() => incrementLocalMetric('downloads'));
+    trackMetric('downloads');
   };
 
   const handleShare = async () => {
@@ -123,7 +185,7 @@ const Manifeste: React.FC = () => {
         window.prompt('Copiez ce lien de partage :', shareUrl);
       }
 
-      incrementRemoteMetric('shares').catch(() => incrementLocalMetric('shares'));
+      trackMetric('shares');
     } catch {
       // Ignore aborted native share dialogs.
     }
@@ -178,27 +240,21 @@ const Manifeste: React.FC = () => {
                 <div className="text-xs font-bold uppercase tracking-[0.2em] text-slate-400">Lectures</div>
                 <div className="mt-3 text-3xl font-black text-amber-300">{readCount}</div>
                 <p className="mt-2 text-sm text-slate-400">
-                  {statsSource === 'global'
-                    ? 'Compteur global synchronise pour tous les visiteurs.'
-                    : 'Compteur local temporaire en attente d une base distante.'}
+                  {statsMessage('Compteur global synchronise pour tous les visiteurs.')}
                 </p>
               </div>
               <div className="rounded-2xl border border-white/10 bg-white/5 p-5">
                 <div className="text-xs font-bold uppercase tracking-[0.2em] text-slate-400">Telechargements</div>
                 <div className="mt-3 text-3xl font-black text-amber-300">{downloadCount}</div>
                 <p className="mt-2 text-sm text-slate-400">
-                  {statsSource === 'global'
-                    ? 'Compteur global conserve de maniere persistante.'
-                    : 'Compteur local mis a jour sur ce navigateur uniquement.'}
+                  {statsMessage('Compteur global conserve de maniere persistante.')}
                 </p>
               </div>
               <div className="rounded-2xl border border-white/10 bg-white/5 p-5">
                 <div className="text-xs font-bold uppercase tracking-[0.2em] text-slate-400">Partages</div>
                 <div className="mt-3 text-3xl font-black text-amber-300">{shareCount}</div>
                 <p className="mt-2 text-sm text-slate-400">
-                  {statsSource === 'global'
-                    ? 'Compteur global des partages effectues depuis la page.'
-                    : 'Compteur local tant que la base distante n est pas activee.'}
+                  {statsMessage('Compteur global des partages effectues depuis la page.')}
                 </p>
               </div>
             </div>

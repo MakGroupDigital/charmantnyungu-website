@@ -1,79 +1,134 @@
-const getKVConfig = () => {
-  const url = process.env.KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL;
-  const token = process.env.KV_REST_API_TOKEN || process.env.UPSTASH_REDIS_REST_TOKEN;
+const FIREBASE_API_KEY =
+  process.env.FIREBASE_API_KEY ||
+  process.env.VITE_FIREBASE_API_KEY ||
+  'AIzaSyCBZF1r8K4t8lVae2Q9whhQTrzt5E1UoAo';
 
-  if (!url || !token) {
-    return null;
+const FIREBASE_DATABASE_URL = (
+  process.env.FIREBASE_DATABASE_URL ||
+  process.env.VITE_FIREBASE_DATABASE_URL ||
+  'https://charmantnyungu-default-rtdb.europe-west1.firebasedatabase.app'
+).replace(/\/+$/g, '');
+
+const METRICS = ['reads', 'downloads', 'shares'];
+
+let cachedAnonymousToken = null;
+let cachedAnonymousTokenExpiresAt = 0;
+
+async function getAnonymousToken() {
+  if (cachedAnonymousToken && Date.now() < cachedAnonymousTokenExpiresAt - 60_000) {
+    return cachedAnonymousToken;
   }
 
-  return { url, token };
-};
-
-const callKV = async (path, options = {}) => {
-  const config = getKVConfig();
-
-  if (!config) {
-    return null;
-  }
-
-  const response = await fetch(`${config.url}/${path}`, {
-    ...options,
-    headers: {
-      Authorization: `Bearer ${config.token}`,
-      ...options.headers,
-    },
+  const response = await fetch(`https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${FIREBASE_API_KEY}`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ returnSecureToken: true }),
   });
+  const data = await response.json().catch(() => null);
+
+  if (!response.ok || !data?.idToken) {
+    throw new Error(data?.error?.message || 'Anonymous Firebase auth failed');
+  }
+
+  cachedAnonymousToken = data.idToken;
+  cachedAnonymousTokenExpiresAt = Date.now() + Number(data.expiresIn || 3600) * 1000;
+
+  return cachedAnonymousToken;
+}
+
+function databaseUrl(path, token) {
+  return `${FIREBASE_DATABASE_URL}/${path}.json?auth=${encodeURIComponent(token)}`;
+}
+
+async function getRemoteStats() {
+  const token = await getAnonymousToken();
+  const response = await fetch(databaseUrl('manifesteStats', token), {
+    headers: { Accept: 'application/json' },
+  });
+  const data = await response.json().catch(() => null);
 
   if (!response.ok) {
-    throw new Error(`KV request failed with status ${response.status}`);
+    throw new Error(data?.error || `Firebase stats read failed (${response.status})`);
   }
 
-  return response.json();
-};
+  return {
+    reads: Number(data?.reads || 0),
+    downloads: Number(data?.downloads || 0),
+    shares: Number(data?.shares || 0),
+  };
+}
+
+async function incrementRemoteMetric(metric) {
+  const token = await getAnonymousToken();
+  const url = databaseUrl(`manifesteStats/${metric}`, token);
+
+  for (let attempt = 0; attempt < 5; attempt += 1) {
+    const readResponse = await fetch(url, {
+      headers: {
+        Accept: 'application/json',
+        'X-Firebase-ETag': 'true',
+      },
+    });
+    const currentValue = await readResponse.json().catch(() => 0);
+
+    if (!readResponse.ok) {
+      throw new Error(`Firebase metric read failed (${readResponse.status})`);
+    }
+
+    const etag = readResponse.headers.get('etag') || '*';
+    const nextValue = Number(currentValue || 0) + 1;
+    const writeResponse = await fetch(url, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'if-match': etag,
+      },
+      body: JSON.stringify(nextValue),
+    });
+
+    if (writeResponse.status === 412) {
+      continue;
+    }
+
+    const savedValue = await writeResponse.json().catch(() => nextValue);
+
+    if (!writeResponse.ok) {
+      throw new Error(`Firebase metric write failed (${writeResponse.status})`);
+    }
+
+    return Number(savedValue || nextValue);
+  }
+
+  throw new Error('Firebase metric write conflict');
+}
 
 export default async function handler(req, res) {
   res.setHeader('Cache-Control', 'no-store');
 
   try {
     if (req.method === 'GET') {
-      const data = await callKV('mget/manifeste:reads/manifeste:downloads/manifeste:shares');
-
-      if (!data) {
-        return res.status(200).json({
-          reads: null,
-          downloads: null,
-          shares: null,
-          persisted: false,
-        });
-      }
+      const stats = await getRemoteStats();
 
       return res.status(200).json({
-        reads: Number(data.result?.[0] || 0),
-        downloads: Number(data.result?.[1] || 0),
-        shares: Number(data.result?.[2] || 0),
+        ...stats,
         persisted: true,
+        source: 'firebase',
       });
     }
 
     if (req.method === 'POST') {
       const metric = req.body?.metric;
 
-      if (!['reads', 'downloads', 'shares'].includes(metric)) {
+      if (!METRICS.includes(metric)) {
         return res.status(400).json({ error: 'Invalid metric' });
       }
 
-      const data = await callKV(`incr/manifeste:${metric}`, { method: 'POST' });
-
-      if (!data) {
-        return res.status(200).json({
-          count: null,
-          persisted: false,
-        });
-      }
+      const count = await incrementRemoteMetric(metric);
 
       return res.status(200).json({
-        count: Number(data.result || 0),
+        count,
         persisted: true,
+        source: 'firebase',
       });
     }
 
@@ -82,6 +137,7 @@ export default async function handler(req, res) {
     return res.status(500).json({
       error: 'Unable to update manifeste stats',
       details: error instanceof Error ? error.message : 'Unknown error',
+      persisted: false,
     });
   }
 }
