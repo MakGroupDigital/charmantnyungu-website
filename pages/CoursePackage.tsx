@@ -10,6 +10,7 @@ type PaymentState = 'idle' | 'pending' | 'completed' | 'failed';
 const ACCESS_TOKEN_KEY = 'cnk_course_package_access_token';
 const PENDING_PAYMENT_KEY = 'cnk_course_package_pending_reference';
 const ACCESS_TOKEN_KEY_V2 = 'cnk_course_package_direct_access_token';
+const PAYMENT_CONFIRMATION_ATTEMPTS = 24;
 
 const partners: Array<{ id: PaymentPartner; label: string; hint: string }> = [
   { id: 'airtel', label: 'Airtel Money', hint: '97, 98, 99' },
@@ -177,7 +178,7 @@ const CoursePackage: React.FC = () => {
   }, [hasAccess, paymentReference]);
 
   const pollPaymentStatus = async (referenceCode: string, providerTransactionId: string) => {
-    for (let attempt = 0; attempt < 24; attempt += 1) {
+    for (let attempt = 0; attempt < PAYMENT_CONFIRMATION_ATTEMPTS; attempt += 1) {
       await new Promise((resolve) => setTimeout(resolve, 5000));
 
       const result = await postJson('/api/course-package-status', {
@@ -229,7 +230,12 @@ const CoursePackage: React.FC = () => {
     try {
       const referenceCode = generatePaymentReference();
 
-      await set(ref(realtimeDatabase, `coursePackagePayments/${referenceCode}`), {
+      setPaymentReference(referenceCode);
+      setPaymentState('pending');
+      setPaymentMessage('Envoi de la demande de paiement. Confirmez sur votre telephone.');
+      localStorage.setItem(PENDING_PAYMENT_KEY, referenceCode);
+
+      set(ref(realtimeDatabase, `coursePackagePayments/${referenceCode}`), {
         reference: referenceCode,
         telephone: normalizedPhone,
         partner,
@@ -239,12 +245,7 @@ const CoursePackage: React.FC = () => {
         buyerEmail,
         status: 'pending',
         createdAt: new Date().toISOString(),
-      });
-
-      localStorage.setItem(PENDING_PAYMENT_KEY, referenceCode);
-      setPaymentReference(referenceCode);
-      setPaymentState('pending');
-      setPaymentMessage('Envoi de la demande de paiement. Confirmez sur votre telephone.');
+      }).catch(() => undefined);
 
       const result = await postJson('/api/course-package-payment', {
         reference: referenceCode,
@@ -272,6 +273,7 @@ const CoursePackage: React.FC = () => {
       }
 
       if (result.status === 'failed') {
+        localStorage.removeItem(PENDING_PAYMENT_KEY);
         setPaymentState('failed');
         setPaymentMessage(result.error || 'Paiement non abouti.');
         return;
@@ -280,6 +282,7 @@ const CoursePackage: React.FC = () => {
       setPaymentMessage(result.message || 'Confirmez le paiement sur votre telephone.');
       await pollPaymentStatus(referenceCode, result.providerTransactionId || '');
     } catch (error) {
+      localStorage.removeItem(PENDING_PAYMENT_KEY);
       setPaymentState('failed');
       setPaymentMessage(error instanceof Error ? error.message : 'Paiement impossible.');
     }
@@ -449,6 +452,7 @@ const CoursePackage: React.FC = () => {
                       </div>
 
                       <button
+                        type="button"
                         onClick={handlePayment}
                         disabled={paymentState === 'pending'}
                         className="cnk-button w-full bg-amber-500 px-6 py-4 text-slate-950 shadow-xl shadow-amber-900/18 hover:bg-amber-400 disabled:cursor-not-allowed disabled:opacity-70"

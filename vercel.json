@@ -89,7 +89,47 @@
       "destination": "/immersive/index.html"
     },
     {
-      "source": "/((?!api|photos|immersive|favicon|og-image|manifest\\.json|robots|sitemap).*)",
+      "source": "/a-propos",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/expertise",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/projets",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/package-cours-complet",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/cours",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/formations",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/manifeste",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/manifeste/:path*",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/tribune",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/mentions-legales",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/galerie",
       "destination": "/index.html"
     }
   ],
