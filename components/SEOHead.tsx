@@ -90,6 +90,13 @@ export const seoData = {
     keywords: "projets Charmant Nyungu, portfolio consultant, réalisations innovation, plateformes digitales Afrique, projets technologiques RDC, solutions IA, initiatives panafricaines, YBS Innovate",
     url: "https://charmantnyungu.com/projets"
   },
+  research: {
+    title: "Recherche P-E2M2E | Dossier Technique | Charmant Nyungu K.",
+    description: "Lire le dossier technique P-E2M2E de Charmant Nyungu K. : cryptographie physicalisée, serveur aveugle, annihilation contextuelle, fragmentation dynamique et sécurité des données.",
+    keywords: "P-E2M2E, cryptographie physicalisée, Charmant Nyungu K, recherche cybersécurité, serveur aveugle, annihilation contextuelle, chiffrement contextuel, données, sécurité, protocole cryptographique",
+    url: "https://charmantnyungu.com/recherche/pe2m2e",
+    image: "/photos/IMG_1838.jpg"
+  },
   courses: {
     title: "Package Cours Complet | Algorithmique, Python, Data, IA, Cybersecurite | Charmant Nyungu K.",
     description: "Accedez au package complet de six manuels professionnels de Charmant Nyungu K. : algorithmique, Python, bases de donnees, architecture logicielle, cybersecurite defensive, data science et IA avancee.",

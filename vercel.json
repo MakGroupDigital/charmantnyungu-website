@@ -77,6 +77,23 @@
           "value": "SAMEORIGIN"
         }
       ]
+    },
+    {
+      "source": "/recherche/pe2m2e-dossier-technique.pdf",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/pdf"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        }
+      ]
     }
   ],
   "rewrites": [
@@ -98,6 +115,14 @@
     },
     {
       "source": "/projets",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/recherche",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/recherche/pe2m2e",
       "destination": "/index.html"
     },
     {

@@ -7,6 +7,13 @@
         ".validate": "newData.isNumber()"
       }
     },
+    "pe2m2eStats": {
+      ".read": true,
+      "$metric": {
+        ".write": "auth != null && ($metric === 'reads' || $metric === 'downloads' || $metric === 'shares')",
+        ".validate": "newData.isNumber()"
+      }
+    },
     "coursePackagePayments": {
       "$reference": {
         ".read": true,

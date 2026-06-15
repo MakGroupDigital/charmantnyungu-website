@@ -32,6 +32,7 @@ const apiRoutes = new Map([
   ['/api/course-package-status', '../api/course-package-status.js'],
   ['/api/course-package-file', '../api/course-package-file.js'],
   ['/api/manifeste-stats', '../api/manifeste-stats.js'],
+  ['/api/pe2m2e-stats', '../api/pe2m2e-stats.js'],
 ]);
 
 async function readBody(req) {

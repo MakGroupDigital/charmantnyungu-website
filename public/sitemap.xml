@@ -41,6 +41,18 @@
     <priority>0.8</priority>
   </url>
 
+  <!-- Recherche - Dossier technique P-E2M2E -->
+  <url>
+    <loc>https://charmantnyungu.com/recherche/pe2m2e</loc>
+    <lastmod>2026-06-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.96</priority>
+    <image:image>
+      <image:loc>https://charmantnyungu.com/photos/IMG_1838.jpg</image:loc>
+      <image:title>P-E2M2E - Physicalized End-to-Middle-to-End Cryptography</image:title>
+    </image:image>
+  </url>
+
   <!-- Package cours complet -->
   <url>
     <loc>https://charmantnyungu.com/package-cours-complet</loc>

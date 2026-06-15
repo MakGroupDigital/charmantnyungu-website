@@ -3,6 +3,7 @@ export type PageType =
   | 'about'
   | 'expertise'
   | 'projects'
+  | 'research'
   | 'manifeste'
   | 'courses'
   | 'tribune'
@@ -14,6 +15,7 @@ const pagePaths: Record<PageType, string> = {
   about: '/a-propos',
   expertise: '/expertise',
   projects: '/projets',
+  research: '/recherche/pe2m2e',
   manifeste: '/manifeste/etre-artificiel-autonome-ia-2070',
   courses: '/package-cours-complet',
   tribune: '/tribune',
@@ -27,6 +29,8 @@ const aliases = new Map<string, PageType>([
   ['/a-propos', 'about'],
   ['/expertise', 'expertise'],
   ['/projets', 'projects'],
+  ['/recherche', 'research'],
+  ['/recherche/pe2m2e', 'research'],
   ['/cours', 'courses'],
   ['/formations', 'courses'],
   ['/package-cours-complet', 'courses'],
@@ -48,6 +52,7 @@ export const getPageFromLocation = (): PageType => {
       ['about', 'about'],
       ['expertise', 'expertise'],
       ['projects', 'projects'],
+      ['research', 'research'],
       ['courses', 'courses'],
       ['manifeste', 'manifeste'],
       ['tribune', 'tribune'],

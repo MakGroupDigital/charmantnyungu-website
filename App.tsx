@@ -7,6 +7,7 @@ import Home from './pages/Home';
 import About from './pages/About';
 import Expertise from './pages/Expertise';
 import Projects from './pages/Projects';
+import Recherche from './pages/Recherche';
 import Tribune from './pages/Tribune';
 import Legal from './pages/Legal';
 import Gallery from './pages/Gallery';
@@ -40,6 +41,7 @@ const App: React.FC = () => {
       case 'about': return <About />;
       case 'expertise': return <Expertise />;
       case 'projects': return <Projects />;
+      case 'research': return <Recherche />;
       case 'tribune': return <Tribune />;
       case 'manifeste': return <Manifeste />;
       case 'legal': return <Legal />;
