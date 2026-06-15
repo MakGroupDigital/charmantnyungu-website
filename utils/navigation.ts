@@ -67,7 +67,14 @@ export const getPageFromLocation = (): PageType => {
   }
 
   const pathname = window.location.pathname.replace(/\/+$/, '') || '/';
-  return aliases.get(pathname) || 'home';
+  const page = aliases.get(pathname);
+  
+  // Log pour déboguer (à retirer en production si nécessaire)
+  if (!page && pathname !== '/') {
+    console.warn(`Route non trouvée: ${pathname}, redirection vers home`);
+  }
+  
+  return page || 'home';
 };
 
 export const syncLegacyHashRoute = () => {

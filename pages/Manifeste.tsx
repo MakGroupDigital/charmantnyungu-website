@@ -11,10 +11,10 @@ const STORAGE_KEYS = {
   shares: 'manifeste_shares_count',
 };
 type ManifestMetric = 'reads' | 'downloads' | 'shares';
-let readTrackedForCurrentPageLoad = false;
 
 const Manifeste: React.FC = () => {
   const readerRef = useRef<HTMLElement | null>(null);
+  const readTrackedRef = useRef(false);
   const [readCount, setReadCount] = useState(0);
   const [downloadCount, setDownloadCount] = useState(0);
   const [shareCount, setShareCount] = useState(0);
@@ -115,19 +115,23 @@ const Manifeste: React.FC = () => {
   };
 
   const incrementRemoteMetric = async (metric: ManifestMetric) => {
-    await ensureAnonymousUser();
+    try {
+      await ensureAnonymousUser();
 
-    const metricRef = ref(realtimeDatabase, `${STATS_PATH}/${metric}`);
-    const result = await runTransaction(metricRef, (currentValue) => {
-      return Number(currentValue || 0) + 1;
-    });
+      const metricRef = ref(realtimeDatabase, `${STATS_PATH}/${metric}`);
+      const result = await runTransaction(metricRef, (currentValue) => {
+        return Number(currentValue || 0) + 1;
+      });
 
-    if (!result.committed) {
-      throw new Error('Firebase stats update was not committed');
+      if (!result.committed) {
+        throw new Error('Firebase stats update was not committed');
+      }
+
+      const nextValue = Number(result.snapshot.val() || 0);
+      setMetricCount(metric, nextValue);
+    } catch (error) {
+      throw error;
     }
-
-    const nextValue = Number(result.snapshot.val() || 0);
-    setMetricCount(metric, nextValue);
   };
 
   const trackMetric = (metric: ManifestMetric) => {
@@ -155,8 +159,8 @@ const Manifeste: React.FC = () => {
       }
     );
 
-    if (!readTrackedForCurrentPageLoad) {
-      readTrackedForCurrentPageLoad = true;
+    if (!readTrackedRef.current) {
+      readTrackedRef.current = true;
       trackMetric('reads');
     }
 

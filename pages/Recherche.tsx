@@ -25,8 +25,6 @@ type ResearchPage = {
   blocks: ResearchBlock[];
 };
 
-let readTrackedForCurrentPageLoad = false;
-
 const languages = [
   { code: 'fr', label: 'Français original' },
   { code: 'en', label: 'Anglais' },
@@ -38,6 +36,39 @@ const languages = [
   { code: 'sw', label: 'Swahili' },
   { code: 'ln', label: 'Lingala' },
 ];
+
+const safeStorage = {
+  get(key: string) {
+    try {
+      return window.localStorage.getItem(key);
+    } catch {
+      return null;
+    }
+  },
+  set(key: string, value: string) {
+    try {
+      window.localStorage.setItem(key, value);
+      return true;
+    } catch {
+      return false;
+    }
+  },
+  remove(key: string) {
+    try {
+      window.localStorage.removeItem(key);
+    } catch {
+      // Storage can be unavailable in private or restricted browser contexts.
+    }
+  },
+};
+
+const isResearchPageArray = (value: unknown): value is ResearchPage[] => {
+  return Array.isArray(value) && value.every((page) => {
+    if (!page || typeof page !== 'object') return false;
+    const candidate = page as Partial<ResearchPage>;
+    return typeof candidate.title === 'string' && Array.isArray(candidate.blocks);
+  });
+};
 
 const MetricIcon = ({ type }: { type: ResearchMetric }) => {
   if (type === 'downloads') {
@@ -232,6 +263,7 @@ const translatePage = async (page: ResearchPage, targetLanguage: string): Promis
 const Recherche: React.FC = () => {
   const readerSectionRef = useRef<HTMLElement | null>(null);
   const iframeRef = useRef<HTMLIFrameElement | null>(null);
+  const readTrackedRef = useRef(false);
   const [readCount, setReadCount] = useState(0);
   const [downloadCount, setDownloadCount] = useState(0);
   const [shareCount, setShareCount] = useState(0);
@@ -329,16 +361,20 @@ const Recherche: React.FC = () => {
   };
 
   const incrementRemoteMetric = async (metric: ResearchMetric) => {
-    await ensureAnonymousUser();
+    try {
+      await ensureAnonymousUser();
 
-    const metricRef = ref(realtimeDatabase, `${STATS_PATH}/${metric}`);
-    const result = await runTransaction(metricRef, (currentValue) => Number(currentValue || 0) + 1);
+      const metricRef = ref(realtimeDatabase, `${STATS_PATH}/${metric}`);
+      const result = await runTransaction(metricRef, (currentValue) => Number(currentValue || 0) + 1);
 
-    if (!result.committed) {
-      throw new Error('Firebase stats update was not committed');
+      if (!result.committed) {
+        throw new Error('Firebase stats update was not committed');
+      }
+
+      setMetricCount(metric, Number(result.snapshot.val() || 0));
+    } catch (error) {
+      throw error;
     }
-
-    setMetricCount(metric, Number(result.snapshot.val() || 0));
   };
 
   const trackMetric = (metric: ResearchMetric) => {
@@ -365,8 +401,8 @@ const Recherche: React.FC = () => {
       }
     );
 
-    if (!readTrackedForCurrentPageLoad) {
-      readTrackedForCurrentPageLoad = true;
+    if (!readTrackedRef.current) {
+      readTrackedRef.current = true;
       trackMetric('reads');
     }
 
