@@ -13,7 +13,7 @@ const SEOHead: React.FC<SEOHeadProps> = ({
   title,
   description,
   keywords = "Charmant, Nyungu, CNK, consultant, transformation digitale, innovation, panafricanisme, data science, cybersécurité, Afrique, RDC, Congo, Kinshasa, Dakar",
-  image = "/og-image.svg",
+  image = "/og-cnk-signature-v3.png",
   url = "https://charmantnyungu.com",
   type = "website"
 }) => {
@@ -39,17 +39,28 @@ const SEOHead: React.FC<SEOHeadProps> = ({
     updateMetaTag('description', description);
     updateMetaTag('keywords', keywords);
     
+    const imageUrl = new URL(image, 'https://charmantnyungu.com').href;
+    const imageAlt = 'Signature manuscrite Charmant Nyungu K. — Consultant en technologie et panafricaniste, en vert profond et ivoire';
+
     // Open Graph
     updateMetaTag('og:title', title, true);
     updateMetaTag('og:description', description, true);
-    updateMetaTag('og:image', image.startsWith('http') ? image : `https://charmantnyungu.com${image}`, true);
+    updateMetaTag('og:image', imageUrl, true);
+    updateMetaTag('og:image:secure_url', imageUrl, true);
+    updateMetaTag('og:image:type', 'image/png', true);
+    updateMetaTag('og:image:width', '1200', true);
+    updateMetaTag('og:image:height', '630', true);
+    updateMetaTag('og:image:alt', imageAlt, true);
     updateMetaTag('og:url', url, true);
     updateMetaTag('og:type', type, true);
     
     // Twitter
+    updateMetaTag('twitter:card', 'summary_large_image');
+    updateMetaTag('twitter:url', url);
+    updateMetaTag('twitter:image:alt', imageAlt);
     updateMetaTag('twitter:title', title);
     updateMetaTag('twitter:description', description);
-    updateMetaTag('twitter:image', image.startsWith('http') ? image : `https://charmantnyungu.com${image}`);
+    updateMetaTag('twitter:image', imageUrl);
     
     // Update canonical URL
     let canonical = document.querySelector('link[rel="canonical"]') as HTMLLinkElement;
@@ -95,7 +106,7 @@ export const seoData = {
     description: "Lire le dossier technique P-E2M2E de Charmant Nyungu K. : cryptographie physicalisée, serveur aveugle, annihilation contextuelle, fragmentation dynamique et sécurité des données.",
     keywords: "P-E2M2E, cryptographie physicalisée, Charmant Nyungu K, recherche cybersécurité, serveur aveugle, annihilation contextuelle, chiffrement contextuel, données, sécurité, protocole cryptographique",
     url: "https://charmantnyungu.com/recherche/pe2m2e",
-    image: "/photos/IMG_1838.jpg"
+    image: "/og-cnk-signature-v3.png"
   },
   courses: {
     title: "Package Cours Complet | Algorithmique, Python, Data, IA, Cybersecurite | Charmant Nyungu K.",
@@ -108,7 +119,7 @@ export const seoData = {
     description: "Découvrez le manifeste de Charmant Nyungu K. sur l'émergence de l'être artificiel autonome, la conscience encadrée, l'éthique de l'IA et les enjeux de cohabitation entre intelligence humaine et intelligence artificielle d'ici 2070.",
     keywords: "manifeste IA, etre artificiel autonome, IA 2070, conscience artificielle, sentience programmee, ethique IA, Charmant Nyungu manifeste, futur intelligence artificielle, autonomie numerique",
     url: "https://charmantnyungu.com/manifeste/etre-artificiel-autonome-ia-2070",
-    image: "https://res.cloudinary.com/dy73hzkpm/image/upload/v1777539703/IMG_3306_ulsv8q.png"
+    image: "/og-cnk-signature-v3.png"
   },
   tribune: {
     title: "Tribune & Réflexions | Charmant Nyungu K. | Panafricanisme, Technologie, Leadership",

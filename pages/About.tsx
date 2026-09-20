@@ -1,21 +1,15 @@
 
 import React from 'react';
+import PageMasthead from '../components/PageMasthead';
 
 const About: React.FC = () => {
   return (
-    <div className="pt-24 bg-white">
+    <div className="inner-page page-about">
       {/* Hero */}
-      <section className="py-20 bg-slate-50 border-b border-slate-100">
-        <div className="max-w-7xl mx-auto px-6 text-center">
-          <h1 className="text-6xl md:text-8xl font-black mb-8">À Propos</h1>
-          <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed italic">
-            "Un esprit d'innovation au service de l'Afrique et du monde."
-          </p>
-        </div>
-      </section>
+      <PageMasthead number={"01"} title={"À propos"} signature={"Faisons connaissance."} description={"Un esprit d’innovation au service de l’Afrique et du monde."} image={"/photos/IMG_1838.jpg"} />
 
       {/* Présentation */}
-      <section className="py-24 max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
+      <section id="page-content" className="py-24 max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
         <div>
           <h2 className="text-4xl font-bold mb-8 text-slate-900">Un innovateur au parcours multidimensionnel</h2>
           <p className="text-lg text-slate-600 leading-relaxed mb-6">

@@ -298,8 +298,8 @@ const CoursePackage: React.FC = () => {
   };
 
   return (
-    <div className="bg-[#f8f4ea] text-slate-950">
-      <section className="relative min-h-screen overflow-hidden bg-slate-950 pt-32 text-white">
+    <div className="inner-page page-coursepackage">
+      <section className="publication-masthead relative min-h-screen overflow-hidden bg-slate-950 pt-32 text-white">
         <div className="absolute inset-0">
           <img src="/photos/IMG_7908.JPG" alt="Charmant Nyungu K. - formation technologique" className="h-full w-full object-cover opacity-32" />
           <div className="absolute inset-0 bg-[linear-gradient(112deg,rgba(2,6,23,0.98)_0%,rgba(15,23,42,0.9)_42%,rgba(146,64,14,0.76)_100%)]" />
@@ -307,7 +307,7 @@ const CoursePackage: React.FC = () => {
         </div>
 
         <div className="relative z-10 mx-auto grid max-w-7xl gap-10 px-6 pb-20 pt-10 lg:grid-cols-[1.04fr_0.96fr] lg:items-center">
-          <div>
+          <div className="publication-copy">
             <div className="mb-7 inline-flex items-center gap-3 rounded-full border border-amber-300/30 bg-white/10 px-4 py-2 text-xs font-black uppercase tracking-[0.26em] text-amber-200 backdrop-blur">
               <span className="h-2 w-2 rounded-full bg-emerald-300 shadow-[0_0_18px_rgba(110,231,183,0.8)]" />
               Package cours complet

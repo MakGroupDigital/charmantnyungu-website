@@ -20,13 +20,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
           <div className="lg:col-span-2">
             <button onClick={() => handleNavigation('home')} className="mb-6 flex items-center gap-4 text-left text-white">
-              <span className="grid h-14 w-14 overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-2">
-                <img src="/cnk-mark.svg" alt="CNK" className="h-full w-full" />
-              </span>
-              <span>
-                <span className="block text-3xl font-bold tracking-tighter"><span className="text-amber-500 italic">Charmant</span> Nyungu K.</span>
-                <span className="mt-1 block text-[10px] font-bold uppercase tracking-[0.24em] text-white/42">Innovation & souverainete numerique</span>
-              </span>
+              <span className="footer-signature"><img src="/cnk-signature-ivory.svg?v=3" alt="Charmant Nyungu K." /><small>Innovation & souveraineté numérique</small></span>
             </button>
             <p className="text-white/62 max-w-sm mb-8 leading-relaxed">
               Bâtissons ensemble les fondations de l'Afrique de demain, un octet à la fois, une idée à la fois.

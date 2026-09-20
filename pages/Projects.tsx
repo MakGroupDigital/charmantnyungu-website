@@ -1,5 +1,6 @@
 
 import React from 'react';
+import PageMasthead from '../components/PageMasthead';
 
 const Projects: React.FC = () => {
   const projects = [
@@ -14,40 +15,16 @@ const Projects: React.FC = () => {
   ];
 
   return (
-    <div className="pt-24 bg-white">
-      <section className="py-20 bg-slate-50 border-b border-slate-100 relative overflow-hidden">
-        <div className="absolute right-0 top-0 w-1/3 h-full opacity-20 hidden lg:block">
-          <img src="/photos/IMG_2687.JPG" className="w-full h-full object-cover" alt="Charmant Nyungu K." />
-          <div className="absolute inset-0 bg-gradient-to-r from-slate-50 to-transparent"></div>
-        </div>
-        <div className="max-w-7xl mx-auto px-6 text-center relative z-10">
-          <h1 className="text-6xl font-black mb-8 italic">Projets</h1>
-          <p className="text-xl text-slate-500 font-bold uppercase tracking-widest mb-4">Projets & Réalisations</p>
-          <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-            Explorez une sélection de projets qui illustrent ma passion pour la création de solutions technologiques innovantes et percutantes.
-          </p>
-        </div>
-      </section>
+    <div className="inner-page page-projects">
+      <PageMasthead number={"03"} title={"Projets"} signature={"Projets & réalisations"} description={"Explorez une sélection de projets qui illustrent ma passion pour la création de solutions technologiques innovantes et percutantes."} image={"/photos/IMG_2687.JPG"} />
 
-      <section className="py-24 max-w-7xl mx-auto px-6">
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <section id="page-content" className="py-24 max-w-7xl mx-auto px-6">
+        <div className="project-collection">
           {projects.map((proj, i) => (
-            <div key={i} className="group relative bg-white border border-slate-200 rounded-3xl overflow-hidden hover:shadow-2xl transition-all h-[400px]">
-              <div className="absolute inset-0 bg-slate-900 opacity-0 group-hover:opacity-80 transition-opacity z-10"></div>
-              <img src={`https://picsum.photos/seed/${proj.title}/800/600`} className="w-full h-full object-cover transition-transform group-hover:scale-110 duration-700" alt={proj.title} />
-              
-              <div className="absolute inset-0 z-20 p-8 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-all translate-y-4 group-hover:translate-y-0 text-white">
-                 <div className="text-[10px] font-bold uppercase tracking-widest text-amber-500 mb-2">{proj.category}</div>
-                 <h3 className="text-3xl font-bold mb-4">{proj.title}</h3>
-                 <p className="text-sm opacity-80 leading-relaxed mb-6">{proj.desc}</p>
-                 <button className="w-fit border-b border-amber-500 text-amber-500 font-bold text-xs uppercase tracking-widest pb-1">Voir les détails</button>
-              </div>
-
-              {/* Static Badge for IDLE state */}
-              <div className="absolute top-6 left-6 z-20 bg-white/90 backdrop-blur-md px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest text-slate-900 group-hover:hidden transition-all shadow-sm">
-                {proj.title}
-              </div>
-            </div>
+            <article key={proj.title} className="project-card">
+              <div className="project-card-image"><span className="project-image-number" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span><img src={`https://picsum.photos/seed/${encodeURIComponent(proj.title)}/800/600`} alt={proj.title} loading="lazy" onError={(event) => { event.currentTarget.style.visibility = 'hidden'; }}/><span>{proj.category}</span></div>
+              <div className="project-card-body"><span>PROJET {String(i + 1).padStart(2, '0')}</span><h2>{proj.title}</h2><p>{proj.desc}</p><a href={`mailto:consultant@charmantnyungu.com?subject=${encodeURIComponent('En savoir plus sur ' + proj.title)}`}>En savoir plus sur ce projet <span aria-hidden="true">↗</span></a></div>
+            </article>
           ))}
         </div>
       </section>

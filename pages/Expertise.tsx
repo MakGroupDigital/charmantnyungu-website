@@ -1,5 +1,6 @@
 
 import React from 'react';
+import PageMasthead from '../components/PageMasthead';
 
 const Expertise: React.FC = () => {
   const domains = [
@@ -42,24 +43,12 @@ const Expertise: React.FC = () => {
   ];
 
   return (
-    <div className="pt-24 bg-white">
+    <div className="inner-page page-expertise">
       {/* Header */}
-      <section className="py-20 bg-slate-950 text-white relative overflow-hidden">
-        <div className="absolute inset-0 opacity-30">
-          <img src="/photos/IMG_7837.JPG" className="w-full h-full object-cover" alt="Background expertise" />
-          <div className="absolute inset-0 bg-slate-950/80"></div>
-        </div>
-        <div className="max-w-7xl mx-auto px-6 text-center relative z-10">
-          <h1 className="text-6xl font-black mb-8 italic">Expertise</h1>
-          <p className="text-xl text-amber-500 font-bold uppercase tracking-widest mb-8">Une expertise complète au service de l'innovation</p>
-          <p className="text-slate-400 max-w-3xl mx-auto leading-relaxed text-lg">
-            L'approche de Charmant Nyungu K. relie la data science, l'ingénierie logicielle, la cybersécurité et la transformation organisationnelle pour construire des solutions intégrées et durables.
-          </p>
-        </div>
-      </section>
+      <PageMasthead number={"02"} title={"Expertise"} signature={"Une expertise complète au service de l’innovation"} description={"L’approche de Charmant Nyungu K. relie la data science, l’ingénierie logicielle, la cybersécurité et la transformation organisationnelle pour construire des solutions intégrées et durables."} image={"/photos/IMG_7837.JPG"} />
 
       {/* Stratégie */}
-      <section className="py-24 max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center border-b border-slate-100">
+      <section id="page-content" className="py-24 max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center border-b border-slate-100">
         <div>
            <h2 className="text-4xl font-bold mb-6 italic">La Stratégie par l'Action</h2>
            <p className="text-lg text-slate-600 leading-relaxed mb-8">

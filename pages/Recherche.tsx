@@ -605,13 +605,13 @@ const Recherche: React.FC = () => {
   };
 
   return (
-    <div className="bg-white pt-24">
-      <section className="relative overflow-hidden border-b border-slate-200 bg-[linear-gradient(135deg,#f8fafc_0%,#ffffff_48%,#dbeafe_100%)]">
+    <div className="inner-page page-recherche">
+      <section className="publication-masthead relative overflow-hidden border-b border-slate-200 bg-[linear-gradient(135deg,#f8fafc_0%,#ffffff_48%,#dbeafe_100%)]">
         <div className="absolute inset-0 opacity-60">
           <div className="h-full w-full bg-[linear-gradient(90deg,rgba(15,23,42,0.045)_1px,transparent_1px),linear-gradient(180deg,rgba(15,23,42,0.04)_1px,transparent_1px)] bg-[size:54px_54px]" />
         </div>
         <div className="relative mx-auto grid max-w-7xl gap-12 px-6 py-20 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
-          <div>
+          <div className="publication-copy">
             <p className="cnk-kicker mb-5 text-cyan-800">Recherche proprietaire</p>
             <h1 className="text-5xl font-black leading-tight text-slate-950 md:text-7xl">P-E2M2E</h1>
             <p className="mt-4 text-sm font-black uppercase tracking-[0.3em] text-amber-700">

@@ -196,11 +196,11 @@ const Manifeste: React.FC = () => {
   };
 
   return (
-    <div className="pt-24 bg-white">
-      <section className="relative overflow-hidden border-b border-slate-200 bg-slate-950 text-white">
+    <div className="inner-page page-manifeste">
+      <section className="publication-masthead relative overflow-hidden border-b border-slate-200 bg-slate-950 text-white">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(245,158,11,0.24),_transparent_35%),radial-gradient(circle_at_bottom_right,_rgba(251,191,36,0.18),_transparent_30%)]" />
         <div className="relative mx-auto grid max-w-7xl gap-12 px-6 py-20 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
-          <div>
+          <div className="publication-copy">
             <div className="mb-5 inline-flex rounded-full border border-amber-400/30 bg-amber-500/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.3em] text-amber-300">
               Nouveau manifeste
             </div>
@@ -349,7 +349,7 @@ const Manifeste: React.FC = () => {
                   Lien direct partageable : {shareUrl}
                 </p>
               </div>
-              <div className="flex gap-3">
+              <div className="publication-reader-actions flex flex-wrap gap-3">
                 <a
                   href={MANIFESTO_PDF}
                   target="_blank"

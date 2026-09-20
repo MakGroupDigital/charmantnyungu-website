@@ -1,8 +1,18 @@
 
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import PageMasthead from '../components/PageMasthead';
 
 const Gallery: React.FC = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const lightbox = useRef<HTMLDialogElement>(null);
+  useEffect(() => {
+    if (!selectedImage || !lightbox.current) return;
+    lightbox.current.showModal();
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => { document.body.style.overflow = previous; };
+  }, [selectedImage]);
+
 
   const photos = [
     { src: "/photos/IMG_0055.jpg", alt: "Charmant Nyungu K." },
@@ -57,29 +67,19 @@ const Gallery: React.FC = () => {
   ];
 
   return (
-    <div className="pt-24 bg-white min-h-screen">
+    <div className="inner-page page-gallery">
       {/* Header */}
-      <section className="py-20 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white relative overflow-hidden">
-        <div className="absolute inset-0 opacity-20">
-          <div className="absolute top-0 left-0 w-96 h-96 bg-amber-500 rounded-full blur-[150px]"></div>
-          <div className="absolute bottom-0 right-0 w-96 h-96 bg-orange-500 rounded-full blur-[150px]"></div>
-        </div>
-        <div className="max-w-7xl mx-auto px-6 text-center relative z-10">
-          <h1 className="text-6xl font-black mb-8">Galerie</h1>
-          <p className="text-xl text-amber-500 font-bold uppercase tracking-widest mb-4">Moments & Parcours</p>
-          <p className="text-lg text-slate-300 max-w-3xl mx-auto">
-            Découvrez en images le parcours, les rencontres et les moments qui façonnent la vision panafricaine de Charmant Nyungu K.
-          </p>
-        </div>
-      </section>
+      <PageMasthead number={"08"} title={"Galerie"} signature={"Moments & parcours"} description={"Découvrez en images le parcours, les rencontres et les moments qui façonnent la vision panafricaine de Charmant Nyungu K."} image={"/photos/IMG_0103.jpg"} />
 
       {/* Gallery Grid */}
-      <section className="py-16 max-w-7xl mx-auto px-6">
+      <section id="page-content" className="py-16 max-w-7xl mx-auto px-6">
         <div className="columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4">
           {photos.map((photo, index) => (
             <div 
               key={index} 
               className="break-inside-avoid group cursor-pointer"
+              role="button" tabIndex={0} aria-label={`Agrandir la photo ${index + 1}`}
+              onKeyDown={(event) => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); setSelectedImage(photo.src); } }}
               onClick={() => setSelectedImage(photo.src)}
             >
               <div className="relative overflow-hidden rounded-2xl bg-slate-100 shadow-md hover:shadow-2xl transition-all duration-300">
@@ -103,12 +103,11 @@ const Gallery: React.FC = () => {
 
       {/* Lightbox Modal */}
       {selectedImage && (
-        <div 
-          className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center p-4 cursor-pointer"
-          onClick={() => setSelectedImage(null)}
+        <dialog ref={lightbox} className="gallery-lightbox" aria-label="Photo agrandie" onCancel={() => setSelectedImage(null)}
+          onClick={(event) => { if (event.target === event.currentTarget) setSelectedImage(null); }}
         >
           <button 
-            className="absolute top-6 right-6 text-white hover:text-amber-500 transition-colors"
+            aria-label="Fermer la photo" className="absolute top-6 right-6 text-white hover:text-amber-500 transition-colors"
             onClick={() => setSelectedImage(null)}
           >
             <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -121,7 +120,7 @@ const Gallery: React.FC = () => {
             className="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           />
-        </div>
+        </dialog>
       )}
 
       {/* Quote Section */}

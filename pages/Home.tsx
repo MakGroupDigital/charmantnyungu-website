@@ -10,13 +10,13 @@ interface HomeProps {
   onNavigate: (p: string) => void;
 }
 
-const Home: React.FC<HomeProps> = () => {
+const Home: React.FC<HomeProps> = ({ onNavigate }) => {
   return (
-    <>
-      <Hero />
+    <div className="home-editorial">
+      <Hero onNavigate={onNavigate} />
       
       {/* Section Partenaire Strategique */}
-      <section className="cnk-section border-b border-slate-200 bg-[linear-gradient(135deg,#f8fafc_0%,#ffffff_42%,#fef3c7_100%)] py-24 md:py-32">
+      <section className="mission-section cnk-section border-b border-slate-200 bg-[linear-gradient(135deg,#f8fafc_0%,#ffffff_42%,#fef3c7_100%)] py-24 md:py-32">
         <div className="relative z-10 max-w-7xl mx-auto px-6">
           <div className="mb-16 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
             <div className="max-w-3xl">
@@ -94,44 +94,18 @@ const Home: React.FC<HomeProps> = () => {
 
       <Services />
       
-      <InteractiveSections />
+
 
       <Vision />
 
-      {/* Storytelling in Motion */}
-      <section className="py-24 md:py-32 bg-slate-950 text-white overflow-hidden relative">
-        <div className="absolute inset-0 opacity-[0.28]">
-          <img src="/photos/IMG_7908.JPG" className="w-full h-full object-cover" alt="Background storytelling" />
-          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(2,6,23,0.95),rgba(2,6,23,0.82),rgba(2,6,23,0.56))]"></div>
-        </div>
-        <div className="relative z-10 mx-auto grid max-w-7xl gap-14 px-6 lg:grid-cols-[0.75fr_1.25fr] lg:items-start">
-          <div className="lg:sticky lg:top-28">
-            <p className="cnk-kicker mb-5 text-amber-300">Narration</p>
-            <h2 className="text-4xl md:text-6xl font-bold">Storytelling en motion</h2>
-            <p className="mt-6 max-w-md text-sm leading-relaxed text-white/62">
-              Une trajectoire lisible : autonomie, donnees, formation, execution. Le site doit raconter une ambition, pas seulement lister des services.
-            </p>
-          </div>
-          <div className="space-y-5">
-            {[
-              "D'abord, il y a une vision : l'autonomie numérique de l'Afrique.",
-              "Ensuite, une mission : transformer les données en décisions.",
-              "Puis, une action : former, créer, innover.",
-              "Pour un objectif final : bâtir un futur souverain."
-            ].map((text, i) => (
-              <div key={i} className="grid gap-6 rounded-2xl border border-white/10 bg-white/[0.055] p-6 backdrop-blur-md transition-all hover:border-amber-300/45 hover:bg-white/[0.085] md:grid-cols-[5rem_1fr] md:p-8">
-                <div className="font-body text-xs font-black uppercase tracking-[0.28em] text-amber-300">0{i + 1}</div>
-                <div className="text-2xl md:text-3xl font-light leading-relaxed text-white/86">{text}</div>
-              </div>
-            ))}
-          </div>
-        </div>
+      <section className="editorial-lab">
+        <div className="lab-heading"><p className="edition-label">Explorer & expérimenter</p><h2>L’innovation se pratique.</h2><p>Des outils pour comprendre, évaluer et échanger.</p></div>
+        <details><summary><span>01 / Laboratoire interactif</span><span>IA, culture tech, ROI & cybersécurité <b>+</b></span></summary><InteractiveSections /></details>
+        <details><summary><span>02 / Innovation Advisor AI</span><span>Dialogue sur la transformation digitale <b>+</b></span></summary><Advisor /></details>
       </section>
 
-      <Advisor />
-
       {/* Trust Section */}
-      <section className="cnk-section py-24 bg-white border-t border-slate-100">
+      <section className="trust-section cnk-section py-24 bg-white border-t border-slate-100">
         <div className="relative z-10 max-w-7xl mx-auto px-6">
           <div className="mb-12 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <div>
@@ -160,7 +134,7 @@ const Home: React.FC<HomeProps> = () => {
       </section>
 
       {/* Final Quote Banner */}
-      <section className="py-24 md:py-32 bg-amber-500 relative overflow-hidden">
+      <section className="closing-quote py-24 md:py-32 bg-amber-500 relative overflow-hidden">
         <div className="absolute inset-0 bg-[linear-gradient(135deg,#f59e0b_0%,#d97706_46%,#0f172a_140%)]"></div>
         <div className="absolute right-0 bottom-0 w-1/3 h-full opacity-[0.35] hidden lg:block">
           <img src="/photos/IMG_0103.jpg" className="w-full h-full object-cover object-top" alt="Charmant Nyungu K." />
@@ -173,7 +147,7 @@ const Home: React.FC<HomeProps> = () => {
           <div className="font-bold text-white uppercase tracking-widest text-sm">— Charmant Nyungu K.</div>
         </div>
       </section>
-    </>
+    </div>
   );
 };
 

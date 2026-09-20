@@ -1,5 +1,6 @@
 
 import React from 'react';
+import PageMasthead from '../components/PageMasthead';
 
 const Tribune: React.FC = () => {
   const themes = [
@@ -36,22 +37,10 @@ const Tribune: React.FC = () => {
   ];
 
   return (
-    <div className="pt-24 bg-white">
-      <section className="py-20 bg-amber-50 border-b border-amber-100 relative overflow-hidden">
-        <div className="absolute left-0 top-0 w-1/4 h-full opacity-30 hidden lg:block">
-          <img src="/photos/IMG_0055.jpg" className="w-full h-full object-cover" alt="Charmant Nyungu K. - Tribune" />
-          <div className="absolute inset-0 bg-gradient-to-l from-amber-50 to-transparent"></div>
-        </div>
-        <div className="max-w-7xl mx-auto px-6 text-center relative z-10">
-          <h1 className="text-6xl font-black mb-8 italic">Tribune & Opinions</h1>
-          <p className="text-xl text-amber-700 font-bold uppercase tracking-widest mb-4">Une parole engagée pour une Afrique consciente</p>
-          <p className="text-lg text-slate-600 max-w-3xl mx-auto">
-            Chaque réflexion est un appel à la responsabilité, à l'action et à la transformation collective.
-          </p>
-        </div>
-      </section>
+    <div className="inner-page page-tribune">
+      <PageMasthead number={"07"} title={"Tribune & Opinions"} signature={"Une parole engagée pour une Afrique consciente"} description={"Chaque réflexion est un appel à la responsabilité, à l’action et à la transformation collective."} image={"/photos/IMG_0055.jpg"} />
 
-      <section className="py-24 max-w-5xl mx-auto px-6">
+      <section id="page-content" className="py-24 max-w-5xl mx-auto px-6">
         <div className="space-y-20">
           {themes.map((t, i) => (
             <div key={i} className="group relative">

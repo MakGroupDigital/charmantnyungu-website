@@ -1,6 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
+import './components/InteriorPages.css';
 import Footer from './components/Footer';
 import SEOHead, { seoData } from './components/SEOHead';
 import Home from './pages/Home';
@@ -52,7 +53,7 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className={`min-h-screen institutional-site ${currentPage === 'home' ? 'institutional-home' : 'institutional-inner'}`}>
       <SEOHead 
         title={currentSEO.title}
         description={currentSEO.description}

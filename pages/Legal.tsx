@@ -1,11 +1,13 @@
 
 import React from 'react';
+import PageMasthead from '../components/PageMasthead';
 
 const Legal: React.FC = () => {
   return (
-    <div className="pt-24 bg-white">
-      <section className="py-24 max-w-4xl mx-auto px-6">
-        <h1 className="text-4xl font-bold mb-12 italic border-b-4 border-amber-500 pb-4 inline-block">Mentions Légales</h1>
+    <div className="inner-page page-legal">
+      <PageMasthead number="09" title="Mentions légales" signature="Clarté & transparence" description="Informations légales et politique de confidentialité du site officiel." />
+      <section id="page-content" className="py-24 max-w-4xl mx-auto px-6">
+
         
         <div className="space-y-12 text-slate-600 leading-relaxed">
           <div>
@@ -24,7 +26,7 @@ const Legal: React.FC = () => {
           </div>
 
           <div className="pt-12 mt-12 border-t border-slate-100">
-            <h1 className="text-4xl font-bold mb-12 italic border-b-4 border-amber-500 pb-4 inline-block">Politique de Confidentialité</h1>
+            <h2 className="text-4xl font-bold mb-12 italic border-b-4 border-amber-500 pb-4 inline-block">Politique de Confidentialité</h2>
             <p className="mb-8 font-bold text-slate-900">Dernière mise à jour: 24 Juillet 2024</p>
             
             <div className="space-y-8">
