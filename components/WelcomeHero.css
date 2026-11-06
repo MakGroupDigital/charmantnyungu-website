@@ -44,3 +44,28 @@
 @media(prefers-reduced-motion:reduce){.welcome-experience *{animation:none!important;transition:none!important;scroll-behavior:auto!important;}}
 .welcome-pathway-grid .pathway-card{min-width:0;}
 @media(max-width:600px){.welcome-pathway-grid{grid-template-columns:minmax(0,1fr);}.pathway-card strong br{display:initial;}.pathway-bottom>span:first-child{min-width:0;}}
+
+/* Bannière officielle (modèle « photo plein écran ») */
+.official-banner{position:relative;min-height:min(815px,calc(100vh - 80px));display:flex;align-items:flex-end;overflow:hidden;background:#0d241e;border-top:5px solid transparent;border-image:linear-gradient(90deg,#007fff 0 45%,#f7d618 45% 48%,#ce1021 48% 52%,#f7d618 52% 55%,#007fff 55%) 1;}
+.official-banner-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:75% 20%;}
+.official-banner::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,#0d241ee6 0%,#0d241eb3 35%,transparent 65%);pointer-events:none;}
+.official-banner-content{position:relative;z-index:1;width:100%;padding:0 max(5%,calc((100vw - 1310px)/2)) 110px;color:#fff;}
+.official-banner-label{font-size:13px;letter-spacing:2px;text-transform:uppercase;color:#d5dfd8;margin:0;}
+.institutional-home h1.official-banner-name{font-family:'Sora',sans-serif;font-size:clamp(40px,4.5vw,64px);font-weight:600;line-height:1.05;letter-spacing:-1.5px;margin:14px 0 16px;color:#fff;}
+.official-banner-role{font-size:19px;line-height:1.6;color:#e3e9e5;max-width:620px;margin:0;}
+.official-banner-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:34px;}
+.official-btn{display:inline-flex;align-items:center;padding:15px 26px;font-size:14px;font-weight:500;border-radius:4px;transition:background .2s,color .2s;}
+.official-btn-light{background:#fff;color:#183d35;}
+.official-btn-light:hover{background:#e6eddd;color:#183d35;}
+.official-btn-outline{border:1px solid #fff;color:#fff;background:transparent;}
+.official-btn-outline:hover{background:#fff;color:#183d35;}
+@media(max-width:800px){
+  .official-banner{min-height:640px;}
+  .official-banner-photo{object-position:68% 20%;}
+  .official-banner::after{background:linear-gradient(0deg,#0d241ef2 0%,#0d241eb3 40%,transparent 75%);}
+  .official-banner-content{padding-bottom:48px;}
+  .official-banner-label{font-size:11px;}
+  .official-banner-role{font-size:16px;}
+  .official-banner-actions{margin-top:24px;}
+  .official-btn{padding:13px 20px;font-size:13px;}
+}

@@ -1,62 +1,27 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import ContactDialog, { ContactIntent } from './ContactDialog';
-import { getGreeting } from '../utils/greeting';
 import { navigateToPage } from '../utils/navigation';
 import './WelcomeHero.css';
 
-const engagements = [
-  { label: 'Technologie', title: 'Transformer les idées en solutions.', text: 'Intelligence artificielle, données et innovation : des outils concrets pour répondre aux défis de demain.', caption: 'L’innovation, au service du réel.' },
-  { label: 'Panafricanisme', title: 'Un continent. Des ambitions communes.', text: 'Relier les talents, transmettre les savoirs et construire ensemble une Afrique qui avance.', caption: 'Le continent comme horizon.' },
-  { label: 'Souveraineté', title: 'Construire notre indépendance numérique.', text: 'Des institutions fortes et des infrastructures maîtrisées pour décider, créer et agir en toute autonomie.', caption: 'Notre avenir nous appartient.' },
-];
-
 const Hero: React.FC<{ onNavigate: (page: string) => void }> = ({ onNavigate }) => {
-  const [hour, setHour] = useState(() => new Date().getHours());
   const [intent, setIntent] = useState<ContactIntent | null>(null);
-  const [engagement, setEngagement] = useState(0);
-  const activeEngagement = engagements[engagement];
-  const { greeting, moment, icon } = getGreeting(hour);
-  useEffect(() => {
-    const update = () => setHour(new Date().getHours());
-    const timer = window.setInterval(update, 60_000);
-    window.addEventListener('focus', update);
-    return () => { window.clearInterval(timer); window.removeEventListener('focus', update); };
-  }, []);
   return (
   <>
     <section id="home" className="welcome-experience" aria-label="Bienvenue sur le site de Charmant Nyungu K.">
-      <div className="welcome-stage">
-        <div className="welcome-topline"><span>Un regard africain. Une portée mondiale.</span><a href="#welcome-pathways">Faisons connaissance <span aria-hidden="true">↓</span></a></div>
-        <div className="welcome-scene">
-          <div className="welcome-editorial">
-            <div className="welcome-salutation entrance-step" title={moment}>
-              <span className="greeting-symbol"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.3">{icon === 'moon' ? <path d="M20 15.4A8.5 8.5 0 018.6 4a8.5 8.5 0 1011.4 11.4Z" /> : <><circle cx="12" cy="12" r="4" /><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5" /></>}</svg></span>
-              <span>{greeting}, <span className="greeting-invitation">heureux de vous accueillir.</span></span>
-            </div>
-            <p className="welcome-site-label entrance-step">Bienvenue sur mon site officiel</p>
-            <h1 className="welcome-name"><span className="name-preface entrance-step">Je suis</span><span className="name-line"><span>Charmant</span></span><span className="name-line"><span>Nyungu K<span className="name-dot">.</span></span></span></h1>
-            <p className="welcome-vocation entrance-step">Consultant en technologie.<span>Résolument <em>panafricaniste.</em></span></p>
-            <div className="engagement-explorer entrance-step">
-              <p className="explorer-label">Trois convictions. Un même cap. <span aria-hidden="true">↘</span></p>
-              <div className="engagement-tabs" role="tablist" aria-label="Explorez mes engagements">
-                {engagements.map((item, i) => <button key={item.label} id={`engagement-tab-${i}`} type="button" role="tab" aria-selected={engagement === i} aria-controls="engagement-panel" tabIndex={engagement === i ? 0 : -1} onClick={() => setEngagement(i)} onKeyDown={(event) => {
-                  if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
-                  event.preventDefault();
-                  const next = event.key === 'Home' ? 0 : event.key === 'End' ? engagements.length - 1 : (i + (event.key === 'ArrowRight' ? 1 : -1) + engagements.length) % engagements.length;
-                  setEngagement(next); document.getElementById(`engagement-tab-${next}`)?.focus();
-                }}>{item.label}<span aria-hidden="true">↗</span></button>)}
-              </div>
-              <div id="engagement-panel" role="tabpanel" tabIndex={0} aria-labelledby={`engagement-tab-${engagement}`} className="engagement-panel"><div key={engagement} className="engagement-content"><h2>{activeEngagement.title}</h2><p>{activeEngagement.text}</p></div></div>
-            </div>
+      <div className="official-banner">
+        <img className="official-banner-photo" src="/photos/f1374e3a-3aaf-466b-87eb-6bc2f713d5e3.jpg.JPG" alt="Charmant Nyungu K., devant sa bibliothèque et le drapeau congolais" fetchPriority="high" />
+        <div className="official-banner-content">
+          <p className="official-banner-label">Site officiel</p>
+          <h1 className="official-banner-name">Charmant Nyungu K.</h1>
+          <p className="official-banner-role">Consultant en innovation technologique et en souveraineté numérique, au service des institutions africaines.</p>
+          <div className="official-banner-actions">
+            <a className="official-btn official-btn-light" href="/a-propos" onClick={(event) => {
+              if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+              event.preventDefault(); navigateToPage('about'); onNavigate('about'); window.scrollTo(0, 0);
+            }}>Découvrir la biographie</a>
+            <button type="button" className="official-btn official-btn-outline" onClick={() => setIntent('question')} aria-haspopup="dialog">Contact</button>
           </div>
-          <figure className="welcome-visual">
-            <div className="portrait-orbit" aria-hidden="true" />
-            <div className="welcome-image-frame"><img src="/photos/f1374e3a-3aaf-466b-87eb-6bc2f713d5e3.jpg.JPG" alt="Charmant Nyungu K., devant sa bibliothèque et le drapeau congolais" fetchPriority="high" /><span className="portrait-side-label">Kinshasa · Dakar · Afrique</span></div>
-            <figcaption><span className="portrait-caption-label">Une vision en mouvement</span><span key={activeEngagement.caption} className="portrait-thought">{activeEngagement.caption}</span><span className="portrait-signature"><img src="/cnk-signature-ivory.svg?v=3" alt="Signature de Charmant Nyungu K." /></span></figcaption>
-            <span className="portrait-note" aria-hidden="true">Pensons demain,<br /><em>ensemble.</em></span>
-          </figure>
         </div>
-        <div className="welcome-bottomline"><span><i aria-hidden="true" /> Technologie & conviction</span><span>Le dialogue est le début de tout.</span><a href="#welcome-pathways" aria-label="Découvrir les possibilités d’échange">Explorer <span aria-hidden="true">↓</span></a></div>
       </div>
       <div id="welcome-pathways" className="welcome-pathways">
         <div className="pathways-heading"><p>Et vous,</p><h2>qu’aimeriez-vous construire ?</h2></div>
